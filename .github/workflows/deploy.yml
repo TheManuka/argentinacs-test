@@ -1,4 +1,4 @@
-name: Publicar sitio (main + test)
+name: Publicar sitio
 
 on:
   push:
@@ -15,37 +15,30 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-deploy:
-    # Solo corre en el repo principal (no en espejos/forks)
-    if: github.repository == 'acesino25/argentinacs-landing'
+  deploy:
+    # Publica la rama main de cada repo:
+    # - acesino25/argentinacs-landing -> www.argentinacs.com.ar (sitio en vivo)
+    # - TheManuka/argentinacs-test    -> subdominio de testeo (espejo de la rama test)
+    if: github.ref == 'refs/heads/main' && (github.repository == 'acesino25/argentinacs-landing' || github.repository == 'TheManuka/argentinacs-test')
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Bajar rama main
+      - name: Bajar el contenido
         uses: actions/checkout@v4
-        with:
-          ref: main
-          path: rama-main
 
-      - name: Bajar rama test
-        uses: actions/checkout@v4
-        with:
-          ref: test
-          path: rama-test
-
-      - name: Armar el sitio (main en la raiz, test en /test)
+      - name: Preparar el sitio (sin archivos internos)
         run: |
           mkdir salida
-          rsync -a --exclude '.git' --exclude '.github' --exclude 'tools' \
-            --exclude 'README.md' --exclude '.gitattributes' --exclude '.gitignore' \
-            rama-main/ salida/
-          mkdir -p salida/test
-          rsync -a --exclude '.git' --exclude '.github' --exclude 'tools' \
-            --exclude 'README.md' --exclude '.gitattributes' --exclude '.gitignore' \
-            --exclude 'CNAME' \
-            rama-test/ salida/test/
+          rsync -a --exclude '.git' --exclude '.github' --exclude 'salida' \
+            --exclude 'tools' --exclude 'README.md' \
+            --exclude '.gitattributes' --exclude '.gitignore' \
+            ./ salida/
+          if [ "$GITHUB_REPOSITORY" = "TheManuka/argentinacs-test" ]; then
+            rm -f salida/CNAME
+            printf 'User-agent: *\nDisallow: /\n' > salida/robots.txt
+          fi
 
       - name: Subir artefacto
         uses: actions/upload-pages-artifact@v3

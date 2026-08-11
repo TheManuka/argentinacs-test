@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
 Disallow: /tools/
-Disallow: /test/
 
 Sitemap: https://www.argentinacs.com.ar/sitemap.xml

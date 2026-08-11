@@ -38,9 +38,9 @@ Después de publicar con el dominio real:
 El sitio vive en GitHub: [acesino25/argentinacs-landing](https://github.com/acesino25/argentinacs-landing) (privado).
 
 - **`main`** → la versión en vivo del sitio (`https://www.argentinacs.com.ar/`). Solo recibe cambios ya probados.
-- **`test`** → rama de trabajo/testeo, publicada automáticamente en `https://www.argentinacs.com.ar/test/`. Los cambios se hacen acá y, una vez verificados, se pasan a `main` (merge o pull request).
+- **`test`** → rama de trabajo/testeo, publicada en el subdominio de prueba `https://test1cs.argentinacs.com.ar/` (vía el repo espejo `TheManuka/argentinacs-test`). Los cambios se hacen acá y, una vez verificados, se pasan a `main` (merge o pull request).
 
-El deploy es automático (GitHub Actions, `.github/workflows/deploy.yml`): cada push a `main` o `test` republica el sitio completo — `main` en la raíz y `test` en la subcarpeta `/test/`, que los buscadores no indexan.
+El deploy es automático (GitHub Actions, `.github/workflows/deploy.yml`): un push a `main` publica el sitio en vivo; un push de la rama `test` al espejo publica el entorno de prueba. El entorno de prueba sirve un robots.txt que bloquea la indexación y no aparece en buscadores.
 
 ## Cómo publicarlo
 
