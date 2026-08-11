@@ -57,13 +57,17 @@ def parsear(pagina):
             src = "https://www.gametracker.com" + src
         d["mapaImg"] = src
 
-    m = re.search(r"Game Server Rank:\s*(?:<[^>]*>\s*)*([\d,]+)(?:st|nd|rd|th)\s*\(([^)]*)\)", pagina, re.S)
-    if m:
-        d["rank"] = m.group(1)
-        d["percentil"] = limpiar(m.group(2)).replace("Percentile", "percentil")
+    i = pagina.find("Game Server Rank")
+    if i >= 0:
+        texto_rank = limpiar(pagina[i:i + 500])
+        m = re.search(r"Rank:\s*([\d,]+)(?:st|nd|rd|th)\s*\(([^)]*)\)", texto_rank)
+        if m:
+            d["rank"] = m.group(1)
+            d["percentil"] = m.group(2).strip().replace("Percentile", "percentil")
 
-    m = re.search(r'id="HTML_online_players"(.*?)(?:<div class="blocknew blocknew666">|$)', pagina, re.S)
-    d["online"] = filas_tabla(m.group(1)) if m else []
+    i = pagina.find('id="HTML_online_players"')
+    j = pagina.find("TOP 10", i) if i >= 0 else -1
+    d["online"] = filas_tabla(pagina[i:j if j > i else len(pagina)]) if i >= 0 else []
 
     i = pagina.find("TOP 10")
     if i >= 0:
@@ -92,18 +96,23 @@ def main():
     errores = 0
     for nombre, ip in servidores:
         url = "https://www.gametracker.com/server_info/%s/" % ip
-        try:
-            req = urllib.request.Request(url, headers={"User-Agent": UA})
-            with urllib.request.urlopen(req, timeout=30) as r:
-                pagina = r.read().decode("utf-8", "replace")
-            if "SERVER DETAILS" not in pagina:
-                raise ValueError("pagina sin contenido esperado")
-            datos = parsear(pagina)
-            datos["nombre"] = nombre
-            todos["servidores"][ip] = datos
-        except Exception as e:  # noqa: BLE001 - un servidor caido no corta el resto
-            print("ERROR %s (%s): %s" % (nombre, ip, e))
-            errores += 1
+        for intento in (1, 2, 3):
+            try:
+                req = urllib.request.Request(url, headers={"User-Agent": UA})
+                with urllib.request.urlopen(req, timeout=30) as r:
+                    pagina = r.read().decode("utf-8", "replace")
+                if "SERVER DETAILS" not in pagina:
+                    raise ValueError("pagina sin contenido esperado")
+                datos = parsear(pagina)
+                datos["nombre"] = nombre
+                todos["servidores"][ip] = datos
+                break
+            except Exception as e:  # noqa: BLE001 - un servidor caido no corta el resto
+                if intento == 3:
+                    print("ERROR %s (%s): %s" % (nombre, ip, e))
+                    errores += 1
+                else:
+                    time.sleep(3)
         time.sleep(1.2)
 
     os.makedirs(SALIDA, exist_ok=True)
