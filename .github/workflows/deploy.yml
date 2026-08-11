@@ -1,0 +1,57 @@
+name: Publicar sitio (main + test)
+
+on:
+  push:
+    branches: [main, test]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-deploy:
+    # Solo corre en el repo principal (no en espejos/forks)
+    if: github.repository == 'acesino25/argentinacs-landing'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Bajar rama main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: rama-main
+
+      - name: Bajar rama test
+        uses: actions/checkout@v4
+        with:
+          ref: test
+          path: rama-test
+
+      - name: Armar el sitio (main en la raiz, test en /test)
+        run: |
+          mkdir salida
+          rsync -a --exclude '.git' --exclude '.github' --exclude 'tools' \
+            --exclude 'README.md' --exclude '.gitattributes' --exclude '.gitignore' \
+            rama-main/ salida/
+          mkdir -p salida/test
+          rsync -a --exclude '.git' --exclude '.github' --exclude 'tools' \
+            --exclude 'README.md' --exclude '.gitattributes' --exclude '.gitignore' \
+            --exclude 'CNAME' \
+            rama-test/ salida/test/
+
+      - name: Subir artefacto
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: salida
+
+      - name: Publicar en GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
