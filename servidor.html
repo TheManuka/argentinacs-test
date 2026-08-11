@@ -19,13 +19,17 @@
     .srv-actions { display: flex; justify-content: center; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
 
     .srv-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
       gap: 18px;
       margin-top: 30px;
-      align-items: start;
+      align-items: flex-start;
     }
-    @media (max-width: 860px) { .srv-grid { grid-template-columns: 1fr; } }
+    .srv-col-izq { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 18px; }
+    .srv-col-der { width: 340px; flex: none; }
+    @media (max-width: 860px) {
+      .srv-grid { flex-direction: column; }
+      .srv-col-der { width: 100%; }
+    }
 
     .srv-panel {
       background: linear-gradient(180deg, var(--panel-2), var(--panel));
@@ -138,48 +142,52 @@
     </div>
 
     <div class="srv-grid" id="srv-grid" hidden>
-      <section class="srv-panel">
-        <h2>Detalle del servidor</h2>
-        <p class="srv-cargando" id="det-cargando">Cargando datos en vivo…</p>
-        <div class="det-grid" id="det-grid" hidden>
-          <div class="det-item"><div class="k">Estado</div><div class="v" id="det-estado">—</div></div>
-          <div class="det-item"><div class="k">Jugadores</div><div class="v" id="det-jugadores">—</div></div>
-          <div class="det-item"><div class="k">Promedio del mes</div><div class="v" id="det-promedio">—</div></div>
-          <div class="det-item"><div class="k">Ranking GameTracker</div><div class="v" id="det-rank">—</div></div>
-          <div class="det-item det-mapa">
-            <img id="det-mapa-img" alt="Mapa actual" hidden>
-            <div><div class="k">Mapa actual</div><div class="v" id="det-mapa">—</div></div>
+      <div class="srv-col-izq">
+        <section class="srv-panel">
+          <h2>Detalle del servidor</h2>
+          <p class="srv-cargando" id="det-cargando">Cargando datos en vivo…</p>
+          <div class="det-grid" id="det-grid" hidden>
+            <div class="det-item"><div class="k">Estado</div><div class="v" id="det-estado">—</div></div>
+            <div class="det-item"><div class="k">Jugadores</div><div class="v" id="det-jugadores">—</div></div>
+            <div class="det-item"><div class="k">Promedio del mes</div><div class="v" id="det-promedio">—</div></div>
+            <div class="det-item"><div class="k">Ranking GameTracker</div><div class="v" id="det-rank">—</div></div>
+            <div class="det-item det-mapa">
+              <img id="det-mapa-img" alt="Mapa actual" hidden>
+              <div><div class="k">Mapa actual</div><div class="v" id="det-mapa">—</div></div>
+            </div>
+            <div class="det-scan" id="det-scan"></div>
           </div>
-          <div class="det-scan" id="det-scan"></div>
-        </div>
-      </section>
+        </section>
 
-      <section class="srv-panel">
-        <h2>Historial</h2>
-        <div class="hist-titulo">Jugadores conectados</div>
-        <div class="hist-tabs">
-          <button data-periodo="-1d" class="activo">24 horas</button>
-          <button data-periodo="-1w">7 días</button>
-          <button data-periodo="-1m">30 días</button>
-        </div>
-        <img class="hist-img" id="hist-players" alt="Historial de jugadores conectados" width="260" height="170">
-        <div class="hist-titulo">Mapas más jugados (semana)</div>
-        <img class="hist-img" id="hist-maps" alt="Mapas más jugados" width="260" height="170">
-        <div class="hist-titulo">Ranking (30 días)</div>
-        <img class="hist-img" id="hist-rank" alt="Evolución del ranking" width="260" height="170">
-      </section>
+        <section class="srv-panel azul">
+          <h2>Jugadores conectados</h2>
+          <p class="srv-cargando" id="pl-cargando">Cargando jugadores…</p>
+          <div id="pl-contenido" hidden></div>
+        </section>
 
-      <section class="srv-panel azul">
-        <h2>Jugadores conectados</h2>
-        <p class="srv-cargando" id="pl-cargando">Cargando jugadores…</p>
-        <div id="pl-contenido" hidden></div>
-      </section>
+        <section class="srv-panel azul">
+          <h2>Top 10 <span style="font-style:normal;font-weight:600;font-size:.75rem;color:var(--muted)">(online y offline)</span></h2>
+          <p class="srv-cargando" id="top-cargando">Cargando top 10…</p>
+          <div id="top-contenido" hidden></div>
+        </section>
+      </div>
 
-      <section class="srv-panel azul">
-        <h2>Top 10 <span style="font-style:normal;font-weight:600;font-size:.75rem;color:var(--muted)">(online y offline)</span></h2>
-        <p class="srv-cargando" id="top-cargando">Cargando top 10…</p>
-        <div id="top-contenido" hidden></div>
-      </section>
+      <div class="srv-col-der">
+        <section class="srv-panel">
+          <h2>Historial</h2>
+          <div class="hist-titulo">Jugadores conectados</div>
+          <div class="hist-tabs">
+            <button data-periodo="-1d" class="activo">24 horas</button>
+            <button data-periodo="-1w">7 días</button>
+            <button data-periodo="-1m">30 días</button>
+          </div>
+          <img class="hist-img" id="hist-players" alt="Historial de jugadores conectados" width="260" height="170">
+          <div class="hist-titulo">Mapas más jugados (semana)</div>
+          <img class="hist-img" id="hist-maps" alt="Mapas más jugados" width="260" height="170">
+          <div class="hist-titulo">Ranking (30 días)</div>
+          <img class="hist-img" id="hist-rank" alt="Evolución del ranking" width="260" height="170">
+        </section>
+      </div>
     </div>
 
     <p class="srv-fuente">
@@ -284,7 +292,8 @@
 
       document.getElementById("det-jugadores").textContent = (d.jugadores !== null && d.max) ? d.jugadores + " / " + d.max : "—";
       document.getElementById("det-promedio").textContent = d.promedio ? d.promedio + " jugadores" : "—";
-      document.getElementById("det-rank").textContent = d.rank ? "#" + d.rank + (d.percentil ? " (" + d.percentil + ")" : "") : "—";
+      var pct = d.percentil ? d.percentil.replace(/(\d+)(?:st|nd|rd|th)\s*percentil/i, "percentil $1") : null;
+      document.getElementById("det-rank").textContent = d.rank ? "#" + d.rank + (pct ? " (" + pct + ")" : "") : "—";
       document.getElementById("det-mapa").textContent = d.mapa || "—";
 
       var mapaImg = document.getElementById("det-mapa-img");
