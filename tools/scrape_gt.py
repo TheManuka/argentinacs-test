@@ -48,7 +48,7 @@ def parsear(pagina):
     d["mapa"] = campo_id(pagina, "HTML_curr_map")
     d["escaneado"] = campo_id(pagina, "last_scanned")
 
-    m = re.search(r'id="HTML_map_ss_img"[^>]*src="([^"]+)"', pagina)
+    m = re.search(r'id="HTML_map_ss_img".{0,200}?<img[^>]*src="([^"]+)"', pagina, re.S)
     if m:
         src = m.group(1)
         if src.startswith("//"):

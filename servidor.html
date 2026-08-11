@@ -295,7 +295,13 @@
       }
 
       var scan = [];
-      if (d.escaneado) scan.push("Último escaneo de GameTracker: " + d.escaneado);
+      if (d.escaneado) {
+        var esc = d.escaneado
+          .replace(/Last scanned\s*/i, "").replace(/\s*ago\s*$/i, "")
+          .replace(/minutes?/, "min").replace(/seconds?/, "seg")
+          .replace(/hours?/, "hs").replace(/days?/, "días");
+        scan.push("Escaneado por GameTracker hace " + esc);
+      }
       if (actualizadoTs) {
         var min = Math.max(0, Math.round((Date.now() / 1000 - actualizadoTs) / 60));
         scan.push("Datos actualizados hace " + min + " min");
