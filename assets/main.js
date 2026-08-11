@@ -88,53 +88,14 @@
     }
   }
 
-  /* Modal con el detalle del servidor (página de GameTracker embebida:
-     jugadores conectados, score, mapa y ranking) */
-  var gtModal = null;
-
-  function buildGtModal() {
-    gtModal = document.createElement("div");
-    gtModal.className = "gt-modal";
-    gtModal.innerHTML =
-      '<div class="gt-modal-box" role="dialog" aria-modal="true" aria-label="Detalle del servidor">' +
-      '<div class="gt-modal-bar"><span class="gt-modal-title"></span>' +
-      '<button class="gt-modal-close" aria-label="Cerrar">✕</button></div>' +
-      '<iframe class="gt-modal-frame" title="Detalle del servidor en GameTracker"></iframe>' +
-      '<p class="gt-modal-hint">Datos en vivo de GameTracker: jugadores conectados, score, mapa y ranking del servidor.</p>' +
-      "</div>";
-    document.body.appendChild(gtModal);
-    gtModal.addEventListener("click", function (e) {
-      if (e.target === gtModal || e.target.closest(".gt-modal-close")) closeGtModal();
-    });
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") closeGtModal();
-    });
-  }
-
-  function openGtModal(url, name) {
-    if (!gtModal) buildGtModal();
-    gtModal.querySelector(".gt-modal-title").textContent = name;
-    gtModal.querySelector(".gt-modal-frame").src = url;
-    gtModal.classList.add("open");
-    document.body.style.overflow = "hidden";
-  }
-
-  function closeGtModal() {
-    if (!gtModal) return;
-    gtModal.classList.remove("open");
-    gtModal.querySelector(".gt-modal-frame").src = "about:blank";
-    document.body.style.overflow = "";
-  }
-
-  /* Clic en cualquier parte libre de la tarjeta abre el detalle */
+  /* Clic en cualquier parte libre de la tarjeta abre la página de detalle
+     del servidor (servidor.html, dentro del sitio) */
   document.addEventListener("click", function (e) {
     var card = e.target.closest(".server-card");
     if (!card) return;
     if (e.target.closest("a, button, [data-copy]")) return;
     var link = card.querySelector(".gt-link");
-    if (!link) return;
-    var h4 = card.querySelector("h4");
-    openGtModal(link.href, h4 ? h4.textContent : "Servidor");
+    if (link) location.href = link.getAttribute("href");
   });
 
   /* Jugadores online de Minecraft (api.mcsrvstat.us).

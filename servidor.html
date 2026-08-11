@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servidor — ArgentinaCS</title>
+  <meta name="description" content="Detalle en vivo del servidor: datos, jugadores conectados, top 10 e historial. Comunidad ArgentinaCS.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#06070b">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+  <style>
+    /* Paneles con recorte de GameTracker */
+    .srv-head { text-align: center; padding: 40px 0 10px; }
+    .srv-head h1 { font-size: clamp(1.6rem, 5vw, 2.6rem); margin: 12px 0 6px; }
+    .srv-head .ip { font-size: 1.05rem; }
+    .srv-actions { display: flex; justify-content: center; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+    .srv-volver { margin-bottom: 6px; display: inline-flex; }
+
+    .srv-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 30px;
+    }
+
+    .srv-panel {
+      background: linear-gradient(180deg, var(--panel-2), var(--panel));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      max-width: 100%;
+    }
+
+    .srv-panel h2 {
+      font-weight: 800;
+      font-style: italic;
+      text-transform: uppercase;
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      color: var(--gold);
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .srv-panel.azul h2 { color: var(--blue-soft); }
+
+    .gt-fit { overflow: hidden; }
+    .gt-zoom { transform-origin: 0 0; }
+    .gt-crop { position: relative; overflow: hidden; background: #fff; border-radius: 8px; }
+    .gt-crop iframe { border: 0; display: block; }
+
+    .srv-fuente {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin: 26px 0 10px;
+    }
+
+    .srv-error {
+      text-align: center;
+      color: var(--muted);
+      padding: 60px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">
+        <svg class="brand-logo" viewBox="0 0 100 100" aria-hidden="true">
+          <g transform="rotate(45 50 50)" fill="#ffffff">
+            <path fill-rule="evenodd" d="M18 18h64v64H18ZM26 26v48h48V26Z"/>
+            <rect x="29" y="29" width="31" height="8"/>
+            <rect x="63" y="29" width="8" height="31"/>
+            <rect x="40" y="63" width="31" height="8"/>
+            <rect x="29" y="40" width="8" height="31"/>
+          </g>
+        </svg>
+        <span class="brand-text">
+          <span class="brand-name">ArgentinaCS</span>
+          <span class="brand-tagline">Llevando juego a la vida de todos</span>
+        </span>
+      </a>
+      <nav class="main-nav">
+        <a href="index.html#cs">Counter-Strike</a>
+        <a href="index.html#minecraft">Minecraft</a>
+        <a href="tienda.html">Tienda</a>
+        <a href="index.html#redes">Redes</a>
+        <a class="nav-cta" href="vip.html">⭐ Contratá VIP</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="srv-head">
+      <a class="btn btn-ghost srv-volver" href="index.html#cs">← Volver al listado</a>
+      <h1 class="display" id="srv-nombre">Servidor</h1>
+      <code class="ip" id="srv-ip" title="Clic para copiar"></code>
+      <div class="srv-actions">
+        <a class="btn btn-gold" id="srv-jugar" href="#">▶ Jugar ahora</a>
+        <button class="btn btn-ghost" id="srv-copiar">⧉ Copiar IP</button>
+      </div>
+    </div>
+
+    <div class="srv-error" id="srv-error" hidden>
+      <p>No se encontró el servidor pedido.</p>
+      <p><a href="index.html#cs">Ver el listado completo →</a></p>
+    </div>
+
+    <div class="srv-grid" id="srv-grid" hidden>
+      <section class="srv-panel">
+        <h2>Detalle del servidor</h2>
+        <div class="gt-fit" data-w="670" data-h="462">
+          <div class="gt-zoom">
+            <div class="gt-crop" style="width:670px;height:462px">
+              <iframe id="fr-detalle" title="Detalle del servidor (GameTracker)" sandbox="" scrolling="no"
+                      style="width:983px;height:900px;margin-top:-329px" loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="srv-panel">
+        <h2>Historial</h2>
+        <div class="gt-fit" data-w="306" data-h="681">
+          <div class="gt-zoom">
+            <div class="gt-crop" style="width:306px;height:681px">
+              <iframe id="fr-historial" title="Historial del servidor (GameTracker)" sandbox="" scrolling="no"
+                      style="width:983px;height:1600px;margin-top:-883px;margin-left:-676px" loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="srv-panel azul">
+        <h2>Jugadores conectados y Top 10</h2>
+        <div class="gt-fit" data-w="676" data-h="640">
+          <div class="gt-zoom">
+            <div class="gt-crop" style="width:676px;height:640px">
+              <iframe id="fr-jugadores" title="Jugadores conectados y Top 10 (GameTracker)" sandbox=""
+                      style="width:676px;height:640px" loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <p class="srv-fuente">
+      Datos en vivo provistos por GameTracker ·
+      <a id="srv-gt-full" href="#" target="_blank" rel="noopener">ver ficha completa</a>
+    </p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 Comunidad ArgentinaCS — Llevando juego a la vida de todos.</p>
+      <p class="footer-credit">Sitio creado por Manuka</p>
+    </div>
+  </footer>
+
+  <script src="assets/main.js"></script>
+  <script>
+  (function () {
+    "use strict";
+    var q = new URLSearchParams(location.search);
+    var ip = q.get("ip") || "";
+    var nombre = q.get("n") || "Servidor";
+
+    // solo IPs con formato válido (evita incrustar URLs arbitrarias)
+    if (!/^\d{1,3}(\.\d{1,3}){3}:\d{2,5}$/.test(ip)) {
+      document.getElementById("srv-error").hidden = false;
+      document.querySelector(".srv-head").hidden = true;
+      return;
+    }
+
+    document.title = nombre + " — ArgentinaCS";
+    document.getElementById("srv-nombre").textContent = nombre;
+    var ipEl = document.getElementById("srv-ip");
+    ipEl.textContent = ip;
+    ipEl.setAttribute("data-copy", ip);
+    document.getElementById("srv-copiar").setAttribute("data-copy", ip);
+    document.getElementById("srv-jugar").href = "steam://connect/" + ip;
+
+    var base = "https://www.gametracker.com/server_info/" + ip + "/";
+    document.getElementById("srv-gt-full").href = base;
+    document.getElementById("fr-detalle").src = base;
+    document.getElementById("fr-historial").src = base;
+    document.getElementById("fr-jugadores").src = base + "#HTML_online_players";
+    document.getElementById("srv-grid").hidden = false;
+
+    // escalar los paneles al ancho disponible (mobile)
+    function ajustar() {
+      var contenedor = document.querySelector("main.container");
+      var fits = document.querySelectorAll(".gt-fit");
+      for (var i = 0; i < fits.length; i++) {
+        var fit = fits[i];
+        var w = parseInt(fit.getAttribute("data-w"), 10);
+        var h = parseInt(fit.getAttribute("data-h"), 10);
+        // ancho disponible dentro del panel (contenedor menos padding del panel)
+        var disponible = Math.min(contenedor.clientWidth, fit.parentElement.clientWidth) - 32;
+        var s = Math.min(1, disponible / w);
+        fit.querySelector(".gt-zoom").style.transform = "scale(" + s + ")";
+        fit.style.width = (w * s) + "px";
+        fit.style.height = (h * s) + "px";
+      }
+    }
+    window.addEventListener("resize", ajustar);
+    ajustar();
+  })();
+  </script>
+</body>
+</html>

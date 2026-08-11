@@ -21,7 +21,8 @@ foreach ($line in ($tsv -split "`n")) {
     $parts = $line -split "`t"
     $name = $parts[0]
     $ip = $parts[1]
-    [void]$sb.Append($card.Replace('{NAME}', $name).Replace('{IP}', $ip))
+    $nameUrl = [System.Uri]::EscapeDataString($name)
+    [void]$sb.Append($card.Replace('{NAMEURL}', $nameUrl).Replace('{NAME}', $name).Replace('{IP}', $ip))
     $count++
   }
 }
