@@ -78,6 +78,9 @@
     .srv-table td { padding: 7px 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
     .srv-table tr:last-child td { border-bottom: none; }
     .srv-table td.num { text-align: right; font-family: "Cascadia Code", "Consolas", monospace; }
+    .srv-table.compacta { font-size: 0.85rem; }
+    .srv-table.compacta td { padding: 5px 8px; }
+    .srv-table.compacta td.pos { width: 26px; }
     .srv-table td.pos { color: var(--muted); width: 34px; }
     .srv-table .nombre { font-weight: 700; overflow-wrap: anywhere; }
     .srv-vacio { text-align: center; color: var(--muted); padding: 14px 0; }
@@ -164,16 +167,16 @@
           <p class="srv-cargando" id="pl-cargando">Cargando jugadores…</p>
           <div id="pl-contenido" hidden></div>
         </section>
-
-        <section class="srv-panel azul">
-          <h2>Top 10 <span style="font-style:normal;font-weight:600;font-size:.75rem;color:var(--muted)">(online y offline)</span></h2>
-          <p class="srv-cargando" id="top-cargando">Cargando top 10…</p>
-          <div id="top-contenido" hidden></div>
-        </section>
       </div>
 
       <div class="srv-col-der">
-        <section class="srv-panel">
+        <section class="srv-panel azul">
+          <h2>Top 10 por score <span style="font-style:normal;font-weight:600;font-size:.72rem;color:var(--muted)">(kills)</span></h2>
+          <p class="srv-cargando" id="top-cargando">Cargando top 10…</p>
+          <div id="top-contenido" hidden></div>
+        </section>
+
+        <section class="srv-panel" style="margin-top:18px">
           <h2>Historial</h2>
           <div class="hist-titulo">Jugadores conectados</div>
           <div class="hist-tabs">
@@ -336,14 +339,18 @@
       document.getElementById("pl-cargando").hidden = true;
       plCont.hidden = false;
 
-      // --- top 10 ---
+      // --- top 10 (ordenado por score de kills, tabla angosta) ---
       var topCont = document.getElementById("top-contenido");
       topCont.innerHTML = "";
       var topFilas = d.top10;
       if (topFilas && topFilas.length) {
-        var tt = tabla(["#", "Jugador", "Score", "Tiempo jugado"]);
+        topFilas = topFilas.slice().sort(function (a, b) {
+          return (parseInt(String(b.score).replace(/[^\d-]/g, ""), 10) || 0) - (parseInt(String(a.score).replace(/[^\d-]/g, ""), 10) || 0);
+        });
+        var tt = tabla(["#", "Jugador", "Score"]);
+        tt.classList.add("compacta");
         for (var k = 0; k < topFilas.length; k++) {
-          fila(tt, [(k + 1) + ".", topFilas[k].nombre, topFilas[k].score, topFilas[k].tiempo], ["pos", "nombre", "num", "num"]);
+          fila(tt, [(k + 1) + ".", topFilas[k].nombre, topFilas[k].score], ["pos", "nombre", "num"]);
         }
         topCont.appendChild(tt);
       } else {
