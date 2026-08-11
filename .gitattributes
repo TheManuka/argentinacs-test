@@ -1,0 +1,6 @@
+# Mantener LF en todos los archivos de texto (los scripts de tools/
+# regeneran HTML byte-idéntico y dependen de esto)
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.svg text eol=lf
