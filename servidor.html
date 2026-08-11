@@ -13,28 +13,25 @@
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css">
   <style>
-    /* Paneles con recorte de GameTracker */
     .srv-head { text-align: center; padding: 40px 0 10px; }
     .srv-head h1 { font-size: clamp(1.6rem, 5vw, 2.6rem); margin: 12px 0 6px; }
     .srv-head .ip { font-size: 1.05rem; }
     .srv-actions { display: flex; justify-content: center; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
-    .srv-volver { margin-bottom: 6px; display: inline-flex; }
 
     .srv-grid {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 18px;
-      justify-content: center;
-      align-items: flex-start;
       margin-top: 30px;
+      align-items: start;
     }
+    @media (max-width: 860px) { .srv-grid { grid-template-columns: 1fr; } }
 
     .srv-panel {
       background: linear-gradient(180deg, var(--panel-2), var(--panel));
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 16px;
-      max-width: 100%;
+      padding: 20px;
     }
 
     .srv-panel h2 {
@@ -44,29 +41,55 @@
       font-size: 1rem;
       letter-spacing: 0.06em;
       color: var(--gold);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       text-align: center;
     }
-
     .srv-panel.azul h2 { color: var(--blue-soft); }
 
-    .gt-fit { overflow: hidden; }
-    .gt-zoom { transform-origin: 0 0; }
-    .gt-crop { position: relative; overflow: hidden; background: #fff; border-radius: 8px; }
-    .gt-crop iframe { border: 0; display: block; }
+    .srv-cargando { text-align: center; color: var(--muted); padding: 18px 0; font-size: 0.9rem; }
 
-    .srv-fuente {
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.85rem;
-      margin: 26px 0 10px;
+    /* Detalle del servidor */
+    .det-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px; }
+    .det-item {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 14px;
     }
+    .det-item .k { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+    .det-item .v { font-weight: 800; font-size: 1.05rem; margin-top: 2px; }
+    .det-item .v.on { color: #6ee7a0; }
+    .det-item .v.off { color: var(--red); }
+    .det-mapa { grid-column: 1 / -1; display: flex; gap: 14px; align-items: center; }
+    .det-mapa img { width: 140px; border-radius: 8px; border: 1px solid var(--border); }
+    .det-scan { grid-column: 1 / -1; text-align: center; color: var(--muted); font-size: 0.75rem; }
 
-    .srv-error {
-      text-align: center;
-      color: var(--muted);
-      padding: 60px 0;
+    /* Tablas de jugadores */
+    .srv-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    .srv-table th {
+      text-align: left; font-size: 0.72rem; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--muted);
+      padding: 6px 10px; border-bottom: 1px solid var(--border);
     }
+    .srv-table td { padding: 7px 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+    .srv-table tr:last-child td { border-bottom: none; }
+    .srv-table td.num { text-align: right; font-family: "Cascadia Code", "Consolas", monospace; }
+    .srv-table td.pos { color: var(--muted); width: 34px; }
+    .srv-table .nombre { font-weight: 700; overflow-wrap: anywhere; }
+    .srv-vacio { text-align: center; color: var(--muted); padding: 14px 0; }
+
+    /* Historial */
+    .hist-titulo { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 14px 0 8px; text-align: center; }
+    .hist-tabs { display: flex; gap: 6px; justify-content: center; margin-bottom: 8px; }
+    .hist-tabs button {
+      background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); color: var(--muted);
+      font-family: inherit; font-size: 0.72rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; cursor: pointer;
+    }
+    .hist-tabs button.activo { color: #101010; background: var(--gold); border-color: var(--gold); }
+    .hist-img { display: block; margin: 0 auto; border-radius: 8px; border: 1px solid var(--border); max-width: 100%; background: #000; }
+
+    .srv-fuente { text-align: center; color: var(--muted); font-size: 0.85rem; margin: 26px 0 10px; }
+    .srv-error { text-align: center; color: var(--muted); padding: 60px 0; }
   </style>
 </head>
 <body>
@@ -100,7 +123,7 @@
 
   <main class="container">
     <div class="srv-head">
-      <a class="btn btn-ghost srv-volver" href="index.html#cs">← Volver al listado</a>
+      <a class="btn btn-ghost" href="index.html#cs">← Volver al listado</a>
       <h1 class="display" id="srv-nombre">Servidor</h1>
       <code class="ip" id="srv-ip" title="Clic para copiar"></code>
       <div class="srv-actions">
@@ -117,38 +140,45 @@
     <div class="srv-grid" id="srv-grid" hidden>
       <section class="srv-panel">
         <h2>Detalle del servidor</h2>
-        <div class="gt-fit" data-w="670" data-h="462">
-          <div class="gt-zoom">
-            <div class="gt-crop" style="width:670px;height:462px">
-              <iframe id="fr-detalle" title="Detalle del servidor (GameTracker)" sandbox="" scrolling="no"
-                      style="width:983px;height:900px;margin-top:-329px" loading="lazy"></iframe>
-            </div>
+        <p class="srv-cargando" id="det-cargando">Cargando datos en vivo…</p>
+        <div class="det-grid" id="det-grid" hidden>
+          <div class="det-item"><div class="k">Estado</div><div class="v" id="det-estado">—</div></div>
+          <div class="det-item"><div class="k">Jugadores</div><div class="v" id="det-jugadores">—</div></div>
+          <div class="det-item"><div class="k">Promedio del mes</div><div class="v" id="det-promedio">—</div></div>
+          <div class="det-item"><div class="k">Ranking GameTracker</div><div class="v" id="det-rank">—</div></div>
+          <div class="det-item det-mapa">
+            <img id="det-mapa-img" alt="Mapa actual" hidden>
+            <div><div class="k">Mapa actual</div><div class="v" id="det-mapa">—</div></div>
           </div>
+          <div class="det-scan" id="det-scan"></div>
         </div>
       </section>
 
       <section class="srv-panel">
         <h2>Historial</h2>
-        <div class="gt-fit" data-w="306" data-h="681">
-          <div class="gt-zoom">
-            <div class="gt-crop" style="width:306px;height:681px">
-              <iframe id="fr-historial" title="Historial del servidor (GameTracker)" sandbox="" scrolling="no"
-                      style="width:983px;height:1600px;margin-top:-883px;margin-left:-676px" loading="lazy"></iframe>
-            </div>
-          </div>
+        <div class="hist-titulo">Jugadores conectados</div>
+        <div class="hist-tabs">
+          <button data-periodo="-1d" class="activo">24 horas</button>
+          <button data-periodo="-1w">7 días</button>
+          <button data-periodo="-1m">30 días</button>
         </div>
+        <img class="hist-img" id="hist-players" alt="Historial de jugadores conectados" width="260" height="170">
+        <div class="hist-titulo">Mapas más jugados (semana)</div>
+        <img class="hist-img" id="hist-maps" alt="Mapas más jugados" width="260" height="170">
+        <div class="hist-titulo">Ranking (30 días)</div>
+        <img class="hist-img" id="hist-rank" alt="Evolución del ranking" width="260" height="170">
       </section>
 
       <section class="srv-panel azul">
-        <h2>Jugadores conectados y Top 10</h2>
-        <div class="gt-fit" data-w="676" data-h="640">
-          <div class="gt-zoom">
-            <div class="gt-crop" style="width:676px;height:640px">
-              <iframe id="fr-jugadores" title="Jugadores conectados y Top 10 (GameTracker)" sandbox=""
-                      style="width:676px;height:640px" loading="lazy"></iframe>
-            </div>
-          </div>
-        </div>
+        <h2>Jugadores conectados</h2>
+        <p class="srv-cargando" id="pl-cargando">Cargando jugadores…</p>
+        <div id="pl-contenido" hidden></div>
+      </section>
+
+      <section class="srv-panel azul">
+        <h2>Top 10 <span style="font-style:normal;font-weight:600;font-size:.75rem;color:var(--muted)">(online y offline)</span></h2>
+        <p class="srv-cargando" id="top-cargando">Cargando top 10…</p>
+        <div id="top-contenido" hidden></div>
       </section>
     </div>
 
@@ -165,6 +195,7 @@
     </div>
   </footer>
 
+  <script src="assets/gt_ids.js"></script>
   <script src="assets/main.js"></script>
   <script>
   (function () {
@@ -173,7 +204,7 @@
     var ip = q.get("ip") || "";
     var nombre = q.get("n") || "Servidor";
 
-    // solo IPs con formato válido (evita incrustar URLs arbitrarias)
+    // solo IPs con formato válido (evita URLs arbitrarias)
     if (!/^\d{1,3}(\.\d{1,3}){3}:\d{2,5}$/.test(ip)) {
       document.getElementById("srv-error").hidden = false;
       document.querySelector(".srv-head").hidden = true;
@@ -187,32 +218,157 @@
     ipEl.setAttribute("data-copy", ip);
     document.getElementById("srv-copiar").setAttribute("data-copy", ip);
     document.getElementById("srv-jugar").href = "steam://connect/" + ip;
-
-    var base = "https://www.gametracker.com/server_info/" + ip + "/";
-    document.getElementById("srv-gt-full").href = base;
-    document.getElementById("fr-detalle").src = base;
-    document.getElementById("fr-historial").src = base;
-    document.getElementById("fr-jugadores").src = base + "#HTML_online_players";
+    var gtUrl = "https://www.gametracker.com/server_info/" + ip + "/";
+    document.getElementById("srv-gt-full").href = gtUrl;
     document.getElementById("srv-grid").hidden = false;
 
-    // escalar los paneles al ancho disponible (mobile)
-    function ajustar() {
-      var contenedor = document.querySelector("main.container");
-      var fits = document.querySelectorAll(".gt-fit");
-      for (var i = 0; i < fits.length; i++) {
-        var fit = fits[i];
-        var w = parseInt(fit.getAttribute("data-w"), 10);
-        var h = parseInt(fit.getAttribute("data-h"), 10);
-        // ancho disponible dentro del panel (contenedor menos padding del panel)
-        var disponible = Math.min(contenedor.clientWidth, fit.parentElement.clientWidth) - 32;
-        var s = Math.min(1, disponible / w);
-        fit.querySelector(".gt-zoom").style.transform = "scale(" + s + ")";
-        fit.style.width = (w * s) + "px";
-        fit.style.height = (h * s) + "px";
+    /* ---------- Historial: imágenes directas de GameTracker ---------- */
+    var gsid = (typeof GT_IDS !== "undefined") ? GT_IDS[ip] : null;
+    var GRAPH = "https://cache.gametracker.com/images/graphs/";
+    function cargarGraficos(periodo) {
+      if (!gsid) return;
+      document.getElementById("hist-players").src = GRAPH + "server_players.php?GSID=" + gsid + "&start=" + (periodo || "-1d") + "&_=" + Date.now();
+      document.getElementById("hist-maps").src = GRAPH + "server_maps.php?GSID=" + gsid + "&_=" + Date.now();
+      document.getElementById("hist-rank").src = GRAPH + "server_rank.php?GSID=" + gsid + "&_=" + Date.now();
+    }
+    var tabs = document.querySelectorAll(".hist-tabs button");
+    for (var t = 0; t < tabs.length; t++) {
+      tabs[t].addEventListener("click", function () {
+        for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove("activo");
+        this.classList.add("activo");
+        document.getElementById("hist-players").src = GRAPH + "server_players.php?GSID=" + gsid + "&start=" + this.getAttribute("data-periodo") + "&_=" + Date.now();
+      });
+    }
+    cargarGraficos("-1d");
+
+    /* ---------- Datos en vivo (JSON generado por nuestro robot cada 10 min) ---------- */
+    var DATOS_URL = "https://raw.githubusercontent.com/TheManuka/argentinacs-test/datos/todos.json";
+
+    function tabla(cabeceras) {
+      var t = document.createElement("table");
+      t.className = "srv-table";
+      var tr = document.createElement("tr");
+      for (var i = 0; i < cabeceras.length; i++) {
+        var th = document.createElement("th");
+        th.textContent = cabeceras[i];
+        tr.appendChild(th);
+      }
+      t.appendChild(tr);
+      return t;
+    }
+
+    function fila(t, celdas, clases) {
+      var tr = document.createElement("tr");
+      for (var i = 0; i < celdas.length; i++) {
+        var td = document.createElement("td");
+        td.textContent = celdas[i];
+        if (clases && clases[i]) td.className = clases[i];
+        tr.appendChild(td);
+      }
+      t.appendChild(tr);
+    }
+
+    function mensaje(cont, txt) {
+      var p = document.createElement("p");
+      p.className = "srv-vacio";
+      p.textContent = txt;
+      cont.appendChild(p);
+    }
+
+    function pintar(d, actualizadoTs) {
+      // --- detalle ---
+      var vivo = d.estado === "online";
+      var estado = document.getElementById("det-estado");
+      estado.textContent = vivo ? "🟢 En línea" : "🔴 Fuera de línea";
+      estado.className = "v " + (vivo ? "on" : "off");
+
+      document.getElementById("det-jugadores").textContent = (d.jugadores !== null && d.max) ? d.jugadores + " / " + d.max : "—";
+      document.getElementById("det-promedio").textContent = d.promedio ? d.promedio + " jugadores" : "—";
+      document.getElementById("det-rank").textContent = d.rank ? "#" + d.rank + (d.percentil ? " (" + d.percentil + ")" : "") : "—";
+      document.getElementById("det-mapa").textContent = d.mapa || "—";
+
+      var mapaImg = document.getElementById("det-mapa-img");
+      if (d.mapaImg) {
+        mapaImg.src = d.mapaImg;
+        mapaImg.hidden = false;
+        mapaImg.onerror = function () { mapaImg.hidden = true; };
+      }
+
+      var scan = [];
+      if (d.escaneado) scan.push("Último escaneo de GameTracker: " + d.escaneado);
+      if (actualizadoTs) {
+        var min = Math.max(0, Math.round((Date.now() / 1000 - actualizadoTs) / 60));
+        scan.push("Datos actualizados hace " + min + " min");
+      }
+      document.getElementById("det-scan").textContent = scan.join(" · ");
+
+      document.getElementById("det-cargando").hidden = true;
+      document.getElementById("det-grid").hidden = false;
+
+      // --- jugadores conectados ---
+      var plCont = document.getElementById("pl-contenido");
+      plCont.innerHTML = "";
+      var jugadores = d.online || [];
+      if (jugadores.length) {
+        var tj = tabla(["#", "Jugador", "Score", "Tiempo"]);
+        for (var j = 0; j < jugadores.length; j++) {
+          fila(tj, [(j + 1) + ".", jugadores[j].nombre, jugadores[j].score, jugadores[j].tiempo], ["pos", "nombre", "num", "num"]);
+        }
+        plCont.appendChild(tj);
+      } else {
+        mensaje(plCont, vivo ? "No hay nadie conectado en este momento." : "El servidor figura fuera de línea en GameTracker.");
+      }
+      document.getElementById("pl-cargando").hidden = true;
+      plCont.hidden = false;
+
+      // --- top 10 ---
+      var topCont = document.getElementById("top-contenido");
+      topCont.innerHTML = "";
+      var topFilas = d.top10;
+      if (topFilas && topFilas.length) {
+        var tt = tabla(["#", "Jugador", "Score", "Tiempo jugado"]);
+        for (var k = 0; k < topFilas.length; k++) {
+          fila(tt, [(k + 1) + ".", topFilas[k].nombre, topFilas[k].score, topFilas[k].tiempo], ["pos", "nombre", "num", "num"]);
+        }
+        topCont.appendChild(tt);
+      } else {
+        mensaje(topCont, "GameTracker todavía no registra estadísticas individuales de este servidor.");
+      }
+      document.getElementById("top-cargando").hidden = true;
+      topCont.hidden = false;
+    }
+
+    function fallar() {
+      var ids = ["det-cargando", "pl-cargando", "top-cargando"];
+      for (var i = 0; i < ids.length; i++) {
+        var el = document.getElementById(ids[i]);
+        if (!el.hidden) el.textContent = "No se pudieron traer los datos. Probá recargar, o mirá la ficha completa en GameTracker (enlace abajo).";
       }
     }
-    window.addEventListener("resize", ajustar);
-    ajustar();
+
+    var reintentos = 0;
+    function actualizar() {
+      fetch(DATOS_URL, { cache: "no-store" })
+        .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+        .then(function (j) {
+          var d = j.servidores ? j.servidores[ip] : null;
+          if (!d) throw new Error("sin datos del servidor");
+          reintentos = 0;
+          pintar(d, j.actualizado);
+        })
+        .catch(function () {
+          reintentos++;
+          if (reintentos <= 2) {
+            setTimeout(actualizar, 4000);
+          } else {
+            reintentos = 0;
+            fallar();
+          }
+        });
+    }
+
+    actualizar();
+    setInterval(actualizar, 300000);
   })();
   </script>
 </body>
