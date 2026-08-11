@@ -1,0 +1,15 @@
+      <article class="server-card cs">
+        <div class="server-main">
+          <div class="server-info">
+            <h4>{NAME}</h4>
+            <code class="ip" data-copy="{IP}" title="Clic para copiar">{IP}</code>
+          </div>
+          <div class="server-actions">
+            <a class="btn btn-gold btn-play" href="steam://connect/{IP}">▶ Jugar</a>
+            <button class="btn btn-copy" data-copy="{IP}" title="Copiar IP" aria-label="Copiar IP">⧉</button>
+          </div>
+        </div>
+        <a class="gt-link" href="https://www.gametracker.com/server_info/{IP}/" target="_blank" rel="noopener" title="Ver estadísticas en GameTracker">
+          <img class="gt-banner" src="https://cache.gametracker.com/server_info/{IP}/b_560_95_1.png" alt="Jugadores online en {NAME}" loading="lazy" width="560" height="95">
+        </a>
+      </article>
