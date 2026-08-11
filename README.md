@@ -33,6 +33,13 @@ Después de publicar con el dominio real:
 2. Verificar la vista previa al compartir con [metatags.io](https://metatags.io) o pegando el link en WhatsApp.
 3. Usar siempre HTTPS (además de seguridad, Google lo premia en el ranking).
 
+## Repositorio y ramas
+
+El sitio vive en GitHub: [acesino25/argentinacs-landing](https://github.com/acesino25/argentinacs-landing) (privado).
+
+- **`main`** → la versión en vivo del sitio. Solo recibe cambios ya probados.
+- **`test`** → rama de trabajo/testeo. Los cambios se hacen acá y, una vez verificados, se pasan a `main` (merge o pull request).
+
 ## Cómo publicarlo
 
 No necesita servidor especial ni base de datos: **subí todos los archivos (manteniendo la carpeta `assets/`) a cualquier hosting** y listo. Funciona en cualquier dominio sin tocar nada, porque todas las rutas son relativas.
