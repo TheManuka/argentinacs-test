@@ -7,19 +7,25 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://argentinacs.com.ar/minecraft.html</loc>
+    <loc>https://argentinacs.com.ar/servidor-minecraft-survival.html</loc>
     <lastmod>2026-08-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://argentinacs.com.ar/voz.html</loc>
+    <loc>https://argentinacs.com.ar/reglas-servidor-minecraft.html</loc>
     <lastmod>2026-08-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://argentinacs.com.ar/novedades.html</loc>
+    <loc>https://argentinacs.com.ar/como-instalar-chat-de-voz.html</loc>
+    <lastmod>2026-08-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://argentinacs.com.ar/novedades-minecraft.html</loc>
     <lastmod>2026-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
