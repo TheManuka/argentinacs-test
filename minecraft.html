@@ -30,14 +30,26 @@
     .mcx-hero { text-align: center; padding: 48px 0 10px; }
     .mcx-hero h1 { font-size: clamp(1.8rem, 5vw, 3rem); margin-bottom: 10px; }
     .mcx-hero .sub { color: var(--muted); max-width: 640px; margin: 0 auto 14px; }
+    .mcx-hero .hero-links { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
 
     .mcx-section { padding: 34px 0 6px; }
     .mcx-section > h2 {
       font-weight: 800; font-style: italic; text-transform: uppercase;
       font-size: 1.25rem; letter-spacing: 0.05em; color: var(--blue-soft);
-      text-align: center; margin-bottom: 18px;
+      text-align: center; margin-bottom: 6px;
     }
     .mcx-section > h2.dorado { color: var(--gold); }
+    .mcx-section > p.intro { text-align: center; color: var(--muted); max-width: 620px; margin: 0 auto 18px; font-size: 0.95rem; }
+
+    /* Resumen */
+    .resumen-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; max-width: 980px; margin: 18px auto 0; }
+    .resumen-item {
+      text-align: center; background: linear-gradient(180deg, var(--panel-2), var(--panel));
+      border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 12px;
+    }
+    .resumen-item .ico { font-size: 1.5rem; }
+    .resumen-item .t { font-weight: 800; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.03em; margin-top: 6px; }
+    .resumen-item .d { color: var(--muted); font-size: 0.8rem; margin-top: 3px; }
 
     .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
     .info-card {
@@ -47,7 +59,7 @@
     .info-card .ico { font-size: 1.7rem; margin-bottom: 8px; }
     .info-card h3 { font-weight: 800; font-size: 1.02rem; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 6px; }
     .info-card p { color: var(--muted); font-size: 0.92rem; }
-    .info-card code {
+    .info-card code, .paso code, .mcx-aviso code {
       font-family: "Cascadia Code", "Consolas", monospace; font-size: 0.85em;
       background: rgba(255, 255, 255, 0.07); padding: 1px 7px; border-radius: 6px; color: var(--blue-soft);
     }
@@ -78,14 +90,13 @@
       border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; overflow-x: auto;
     }
 
-    .pasos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; max-width: 900px; margin: 0 auto; }
+    .pasos { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; max-width: 980px; margin: 0 auto; }
     .paso { text-align: center; background: linear-gradient(180deg, var(--panel-2), var(--panel)); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
     .paso .n {
       width: 34px; height: 34px; line-height: 34px; margin: 0 auto 10px; border-radius: 50%;
       background: var(--blue); color: #071120; font-weight: 900; font-size: 1.05rem;
     }
     .paso p { color: var(--muted); font-size: 0.9rem; }
-    .paso code { font-family: "Cascadia Code", "Consolas", monospace; font-size: 0.85em; background: rgba(255,255,255,0.07); padding: 1px 7px; border-radius: 6px; color: var(--blue-soft); }
 
     .mcx-cta { text-align: center; padding: 40px 0 20px; }
     .mcx-cta .mc-ip { max-width: 340px; margin: 12px auto; }
@@ -112,7 +123,13 @@
       </a>
       <nav class="main-nav">
         <a href="index.html#cs">Counter-Strike</a>
-        <a href="minecraft.html">Minecraft</a>
+        <div class="nav-sub">
+          <a href="minecraft.html">Minecraft <span class="caret">▾</span></a>
+          <div class="sub-menu">
+            <a href="minecraft.html">ℹ️ Conocé el servidor</a>
+            <a href="novedades.html">🗞️ Novedades</a>
+          </div>
+        </div>
         <a href="tienda.html">Tienda</a>
         <a href="index.html#redes">Redes</a>
         <a class="nav-cta" href="vip.html">⭐ Contratá VIP</a>
@@ -123,56 +140,75 @@
   <main class="container">
 
     <div class="mcx-hero">
-      <a class="btn btn-ghost" href="index.html#minecraft">← Volver al inicio</a>
+      <div class="hero-links">
+        <a class="btn btn-ghost" href="index.html#minecraft">← Volver al inicio</a>
+        <a class="btn btn-ghost" href="novedades.html">🗞️ Novedades</a>
+      </div>
       <h1 class="display">Nuestro servidor de <span class="text-blue">Minecraft</span></h1>
       <p class="sub">Survival con protecciones, habilidades y comunidad. Un único mundo para Java y Bedrock — entrá desde PC, celu o tablet.</p>
       <p class="mc-players" id="mc-players" role="status">Consultando jugadores…</p>
       <ul class="mc-online-list" id="mc-online-list" hidden></ul>
+
+      <div class="resumen-grid">
+        <div class="resumen-item"><div class="ico">🌎</div><div class="t">Survival protegido</div><div class="d">Tu base, intocable</div></div>
+        <div class="resumen-item"><div class="ico">📱</div><div class="t">Java + Bedrock</div><div class="d">Mismo mundo</div></div>
+        <div class="resumen-item"><div class="ico">🎁</div><div class="t">VIP gratis 3 días</div><div class="d">Al entrar por primera vez</div></div>
+        <div class="resumen-item"><div class="ico">📈</div><div class="t">Habilidades</div><div class="d">Progresás por jugar</div></div>
+        <div class="resumen-item"><div class="ico">🎙️</div><div class="t">Voz por proximidad</div><div class="d">Con mod opcional</div></div>
+        <div class="resumen-item"><div class="ico">🛒</div><div class="t">Tienda automática</div><div class="d">QR y entrega al instante</div></div>
+      </div>
     </div>
 
     <section class="mcx-section">
-      <h2>Modo de juego</h2>
+      <h2>1 · Tu primer día</h2>
+      <p class="intro">Entrar lleva un minuto, y arrancás con todos los beneficios VIP para probar.</p>
+      <div class="pasos">
+        <div class="paso">
+          <div class="n">1</div>
+          <p>Agregá el servidor y conectate<br><strong style="color:#fff">Java: 45.235.98.41:25565<br>Bedrock: 45.235.98.41 : 19132</strong></p>
+        </div>
+        <div class="paso">
+          <div class="n">2</div>
+          <p>Registrá tu contraseña para proteger tu cuenta<br><code>/register &lt;contraseña&gt;</code><br>(después entrás con <code>/login</code>)</p>
+        </div>
+        <div class="paso">
+          <div class="n">3</div>
+          <p>Recibís <strong style="color:var(--gold-soft)">VIP gratis por 3 días</strong> automáticamente</p>
+        </div>
+        <div class="paso">
+          <div class="n">4</div>
+          <p>Explorá desde el <code>/spawn</code> y elegí dónde construir tu base</p>
+        </div>
+      </div>
+      <p class="mcx-aviso">💡 ¿Jugás sin cuenta premium? Elegí cualquier skin con <code>/skin</code> o el menú <code>/skins</code> — funciona para todos.</p>
+    </section>
+
+    <section class="mcx-section">
+      <h2>2 · Tu casa y tus viajes</h2>
+      <p class="intro">Encontraste el lugar perfecto — que sea fácil volver.</p>
       <div class="info-grid">
         <div class="info-card">
-          <div class="ico">🌎</div>
-          <h3>Survival con protecciones</h3>
-          <p>Supervivencia clásica en un mundo compartido: construí donde quieras y protegé lo tuyo con Piedras de Protección. Nadie puede romper, construir ni abrir cofres en tu zona.</p>
+          <div class="ico">🏠</div>
+          <h3>Guardá tus casas</h3>
+          <p><code>/sethome</code> donde estés parado y volvé cuando quieras con <code>/home</code>. Jugador común: <strong>3 casas</strong> · VIP: <strong>5 casas</strong>.</p>
         </div>
         <div class="info-card">
-          <div class="ico">📈</div>
-          <h3>Habilidades que suben solas</h3>
-          <p>Minería, agricultura, pesca, combate y más: tu personaje progresa por jugar y cada nivel te da bonificaciones. Mirá tu progreso con <code>/skills</code> y competí en el ranking con <code>/top</code>.</p>
+          <div class="ico">🧭</div>
+          <h3>Moverte por el mundo</h3>
+          <p><code>/spawn</code> te lleva al centro del servidor, <code>/tpa</code> te teletransporta con amigos (con su permiso) y <code>/warps</code> lista los destinos públicos.</p>
         </div>
         <div class="info-card">
           <div class="ico">🪦</div>
-          <h3>Tumbas al morir</h3>
-          <p>Si morís, tus cosas no se pierden: quedan guardadas en una tumba para que vuelvas a buscarlas tranquilo. <code>/graves</code> te muestra dónde.</p>
-        </div>
-        <div class="info-card">
-          <div class="ico">🎙️</div>
-          <h3>Chat de voz por proximidad</h3>
-          <p>Escuchás a los que están cerca tuyo en el juego, como en la vida real. Con el mod <strong>Simple Voice Chat</strong> (opcional — sin el mod jugás igual).</p>
-        </div>
-        <div class="info-card">
-          <div class="ico">🕺</div>
-          <h3>TreeTwerk</h3>
-          <p>Agachate repetidamente al lado de un brote o cultivo y crece más rápido. Sí, en serio: el twerk hace crecer los árboles.</p>
-        </div>
-        <div class="info-card">
-          <div class="ico">🏆</div>
-          <h3>Recompensas por jugar</h3>
-          <p>Con <code>/playtime</code> reclamás premios por tus horas de juego, y hay eventos y sorteos seguidos organizados por el staff.</p>
+          <h3>Si morís, no perdés nada</h3>
+          <p>Tus cosas quedan guardadas en una tumba para que vuelvas a buscarlas tranquilo. <code>/graves</code> te muestra dónde están.</p>
         </div>
       </div>
     </section>
 
     <section class="mcx-section">
-      <h2 class="dorado">Piedras de protección</h2>
+      <h2 class="dorado">3 · Protegé lo tuyo</h2>
+      <p class="intro">Las Piedras de Protección son bloques especiales: los colocás y la zona alrededor queda protegida — nadie puede romper, construir ni abrir cofres ahí.</p>
       <div class="panelizado">
-        <p style="color:var(--muted); text-align:center; max-width:640px; margin:0 auto">
-          Colocás la piedra y la zona alrededor queda protegida automáticamente. Podés sumar amigos con
-          <span style="font-family:Consolas,monospace; color:var(--blue-soft)">/ps add</span>, ponerle nombre, ver los bordes y hasta unir dos protecciones contiguas.
-        </p>
         <div class="piedras-row">
           <div class="piedra"><div class="t">8×8</div><div class="d">bloques</div></div>
           <div class="piedra"><div class="t">16×16</div><div class="d">bloques</div></div>
@@ -181,37 +217,51 @@
           <div class="piedra"><div class="t">128×128</div><div class="d">bloques</div></div>
           <div class="piedra"><div class="t">256×256</div><div class="d">bloques</div></div>
         </div>
-        <p style="color:var(--muted); text-align:center; font-size:.92rem">
-          Límite de piedras colocadas: jugador común <strong style="color:#fff">2</strong> · VIP <strong style="color:var(--gold-soft)">7</strong>.
+        <p style="color:var(--muted); text-align:center; max-width:640px; margin:10px auto 0; font-size:.92rem">
+          Sumá amigos a tu protección con <span style="font-family:Consolas,monospace; color:var(--blue-soft)">/ps add</span>, ponele nombre, mirá los bordes con
+          <span style="font-family:Consolas,monospace; color:var(--blue-soft)">/ps view</span> y uní protecciones contiguas.
           Se consiguen en la tienda del juego, por referidos y en eventos.
+          Límite colocadas: común <strong style="color:#fff">2</strong> · VIP <strong style="color:var(--gold-soft)">7</strong>.
         </p>
       </div>
       <p class="mcx-aviso">⚠️ Si no te conectás durante <strong>30 días</strong>, tus piedras se eliminan automáticamente y la zona queda desprotegida.</p>
     </section>
 
     <section class="mcx-section">
-      <h2>Casas y viajes</h2>
+      <h2>4 · Progresá jugando</h2>
+      <p class="intro">Mientras construís y explorás, tu personaje crece solo.</p>
       <div class="info-grid">
         <div class="info-card">
-          <div class="ico">🏠</div>
-          <h3>Tus casas</h3>
-          <p>Guardá tus lugares favoritos con <code>/sethome</code> y volvé cuando quieras con <code>/home</code>. Jugador común: <strong>3 casas</strong> · VIP: <strong>5 casas</strong>.</p>
+          <div class="ico">📈</div>
+          <h3>Habilidades</h3>
+          <p>Minería, agricultura, pesca, combate y más suben de nivel automáticamente y dan bonificaciones. <code>/skills</code> para tu progreso, <code>/top</code> para el ranking del servidor.</p>
         </div>
         <div class="info-card">
-          <div class="ico">🧭</div>
-          <h3>Teletransporte</h3>
-          <p><code>/spawn</code> te lleva al centro del servidor, <code>/tpa</code> te teletransporta con amigos (con su permiso) y <code>/warps</code> lista los destinos públicos.</p>
+          <div class="ico">🏆</div>
+          <h3>Recompensas por jugar</h3>
+          <p>Con <code>/playtime</code> reclamás premios por tus horas de juego, y hay eventos y sorteos seguidos organizados por el staff.</p>
         </div>
         <div class="info-card">
-          <div class="ico">🎭</div>
-          <h3>Skins para todos</h3>
-          <p>¿Jugás sin cuenta premium? Elegí cualquier skin con <code>/skin</code> o el menú <code>/skins</code> — funciona para todos.</p>
+          <div class="ico">🕺</div>
+          <h3>TreeTwerk</h3>
+          <p>Agachate repetidamente al lado de un brote o cultivo y crece más rápido. Sí, en serio: el twerk hace crecer los árboles.</p>
+        </div>
+        <div class="info-card">
+          <div class="ico">🎙️</div>
+          <h3>Chat de voz por proximidad</h3>
+          <p>Escuchás a los que están cerca tuyo en el juego, como en la vida real. Con el mod <strong>Simple Voice Chat</strong> (opcional — sin el mod jugás igual).</p>
         </div>
       </div>
     </section>
 
     <section class="mcx-section">
-      <h2 class="dorado">Beneficios VIP</h2>
+      <h2>5 · Traé a tus amigos</h2>
+      <p class="mcx-aviso" style="margin-top:0">🎁 Compartí tu código de <code>/referral</code>: cuando tu amigo cumple <strong>1 hora de juego</strong>, vos ganás <strong>5 días de VIP + una Piedra de Protección 16</strong>. Hasta 5 amigos.</p>
+    </section>
+
+    <section class="mcx-section">
+      <h2 class="dorado">6 · Cuando quieras más: VIP</h2>
+      <p class="intro">Ya lo probaste gratis los primeros 3 días — esto es todo lo que incluye:</p>
       <div class="panelizado">
         <table class="vip-tabla">
           <tr><th>Beneficio</th><th>Común</th><th>VIP</th></tr>
@@ -226,11 +276,11 @@
           <tr><td>Piedra de Protección 32 de regalo</td><td>—</td><td>✔</td></tr>
         </table>
       </div>
-      <p class="mcx-aviso">🎁 <strong>Jugadores nuevos:</strong> al entrar por primera vez recibís <strong>VIP gratis por 3 días</strong> para probar todo. Y por cada amigo que invités con <span style="font-family:Consolas,monospace">/referral</span> que juegue 1 hora, ganás <strong>5 días de VIP + una Piedra 16</strong> (hasta 5 amigos).</p>
+      <p class="mcx-aviso">⭐ Se contrata con <code>/vip</code> dentro del juego y dura 30 días.</p>
     </section>
 
     <section class="mcx-section">
-      <h2>Tienda del juego</h2>
+      <h2>7 · La tienda del juego</h2>
       <div class="info-grid">
         <div class="info-card">
           <div class="ico">🛒</div>
@@ -252,25 +302,11 @@
 
     <div class="mcx-cta">
       <h2 class="display" style="font-size:clamp(1.4rem,4vw,2rem)">¿Listo para <span class="text-blue">entrar</span>?</h2>
-      <div class="pasos" style="margin-top:20px">
-        <div class="paso">
-          <div class="n">1</div>
-          <p>Agregá el servidor y conectate<br><strong style="color:#fff">Java o Bedrock, da igual</strong></p>
-        </div>
-        <div class="paso">
-          <div class="n">2</div>
-          <p>Registrá tu contraseña<br><code>/register &lt;contraseña&gt;</code></p>
-        </div>
-        <div class="paso">
-          <div class="n">3</div>
-          <p>¡A jugar! Ya tenés<br><strong style="color:var(--gold-soft)">VIP gratis por 3 días</strong></p>
-        </div>
-      </div>
       <div class="mc-ip" data-copy="45.235.98.41:25565" title="Clic para copiar">
         45.235.98.41:25565
         <small>Java — PC · Bedrock: IP 45.235.98.41, puerto 19132</small>
       </div>
-      <div class="srv-actions" style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-top:8px">
+      <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-top:8px">
         <button class="btn btn-blue" data-copy="45.235.98.41:25565">⧉ Copiar IP Java</button>
         <a class="btn btn-blue" href="minecraft://?addExternalServer=ArgentinaCS|45.235.98.41:19132">▶ Agregar en Bedrock</a>
         <a class="btn btn-ghost" href="https://discord.gg/argentinacs" target="_blank" rel="noopener">Unite al Discord</a>
