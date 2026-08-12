@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cómo instalar el chat de voz — ArgentinaCS</title>
+  <meta name="description" content="Guía paso a paso para instalar el chat de voz por proximidad del servidor de Minecraft, explicada desde cero: con CurseForge o TLauncher, versión 1.21.11.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#06070b">
+  <link rel="canonical" href="https://argentinacs.com.ar/voz.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ArgentinaCS">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:title" content="Cómo instalar el chat de voz — ArgentinaCS">
+  <meta property="og:description" content="Guía paso a paso desde cero para el chat de voz por proximidad: CurseForge o TLauncher, versión 1.21.11.">
+  <meta property="og:url" content="https://argentinacs.com.ar/voz.html">
+  <meta property="og:image" content="https://argentinacs.com.ar/assets/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cómo instalar el chat de voz — ArgentinaCS">
+  <meta name="twitter:description" content="Guía paso a paso desde cero para el chat de voz por proximidad: CurseForge o TLauncher, versión 1.21.11.">
+  <meta name="twitter:image" content="https://argentinacs.com.ar/assets/og.jpg">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+  <style>
+    .voz-hero { text-align: center; padding: 48px 0 16px; }
+    .voz-hero h1 { font-size: clamp(1.7rem, 5vw, 2.6rem); margin-bottom: 10px; }
+    .voz-hero .sub { color: var(--muted); max-width: 640px; margin: 0 auto; }
+
+    .voz-seccion { padding: 30px 0 4px; max-width: 860px; margin: 0 auto; }
+    .voz-seccion > h2 {
+      font-weight: 800; font-style: italic; text-transform: uppercase;
+      font-size: 1.2rem; letter-spacing: 0.05em; color: var(--blue-soft);
+      text-align: center; margin-bottom: 14px;
+    }
+    .voz-seccion > h2.dorado { color: var(--gold); }
+
+    .concepto-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+    .concepto {
+      background: linear-gradient(180deg, var(--panel-2), var(--panel));
+      border: 1px solid var(--border); border-radius: var(--radius); padding: 18px;
+    }
+    .concepto h3 { font-weight: 800; font-size: 0.95rem; margin-bottom: 6px; }
+    .concepto p { color: var(--muted); font-size: 0.9rem; }
+
+    .voz-aviso {
+      margin: 16px 0 0; padding: 12px 18px; text-align: center;
+      background: rgba(255, 182, 30, 0.07); border: 1px dashed rgba(255, 182, 30, 0.4);
+      border-radius: var(--radius); color: var(--muted); font-size: 0.92rem;
+    }
+    .voz-aviso strong { color: var(--gold-soft); }
+
+    .guia {
+      background: linear-gradient(180deg, var(--panel-2), var(--panel));
+      border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 8px;
+    }
+    .guia ol { margin: 0; padding-left: 22px; color: var(--muted); }
+    .guia ol li { margin-bottom: 12px; font-size: 0.95rem; }
+    .guia ol li strong { color: #fff; }
+    .guia code, .voz-aviso code {
+      font-family: "Cascadia Code", "Consolas", monospace; font-size: 0.85em;
+      background: rgba(255, 255, 255, 0.07); padding: 1px 7px; border-radius: 6px; color: var(--blue-soft);
+    }
+    .descarga-fila { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin: 14px 0 4px; }
+
+    .voz-volver { text-align: center; padding: 30px 0; }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">
+        <svg class="brand-logo" viewBox="0 0 100 100" aria-hidden="true">
+          <g transform="rotate(45 50 50)" fill="#ffffff">
+            <path fill-rule="evenodd" d="M18 18h64v64H18ZM26 26v48h48V26Z"/>
+            <rect x="29" y="29" width="31" height="8"/>
+            <rect x="63" y="29" width="8" height="31"/>
+            <rect x="40" y="63" width="31" height="8"/>
+            <rect x="29" y="40" width="8" height="31"/>
+          </g>
+        </svg>
+        <span class="brand-text">
+          <span class="brand-name">ArgentinaCS</span>
+          <span class="brand-tagline">Llevando juego a la vida de todos</span>
+        </span>
+      </a>
+      <nav class="main-nav">
+        <a href="index.html#cs">Counter-Strike</a>
+        <div class="nav-sub">
+          <a href="minecraft.html">Minecraft <span class="caret">▾</span></a>
+          <div class="sub-menu">
+            <a href="minecraft.html">ℹ️ Conocé el servidor</a>
+            <a href="novedades.html">🗞️ Novedades</a>
+            <a href="voz.html">🎙️ Instalar chat de voz</a>
+          </div>
+        </div>
+        <a href="tienda.html">Tienda</a>
+        <a href="index.html#redes">Redes</a>
+        <a class="nav-cta" href="vip.html">⭐ Contratá VIP</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <div class="voz-hero">
+      <a class="btn btn-ghost" href="minecraft.html">← Volver a la info del servidor</a>
+      <h1 class="display">🎙️ Instalá el <span class="text-blue">chat de voz</span></h1>
+      <p class="sub">En nuestro servidor podés hablar por micrófono y te escuchan solo los que están cerca tuyo en el juego, como en la vida real. Es opcional (sin esto jugás igual) y es gratis. Esta guía te lleva de la mano aunque nunca hayas instalado nada.</p>
+    </div>
+
+    <section class="voz-seccion">
+      <h2>Primero, tres conceptos en criollo</h2>
+      <div class="concepto-grid">
+        <div class="concepto">
+          <h3>🧩 ¿Qué es un mod?</h3>
+          <p>Un archivo que le agrega cosas nuevas a tu Minecraft — en este caso, la voz. Se instala en tu computadora, no en el servidor: por eso cada jugador que quiera voz tiene que hacerlo una vez.</p>
+        </div>
+        <div class="concepto">
+          <h3>🚀 ¿Qué es un launcher?</h3>
+          <p>El programa desde donde abrís Minecraft (donde apretás "Jugar"). Los más comunes son el oficial, <strong>CurseForge</strong> y <strong>TLauncher</strong>. Abajo hay una guía para cada uno de estos dos.</p>
+        </div>
+        <div class="concepto">
+          <h3>⚙️ ¿Qué es Fabric?</h3>
+          <p>Un "enchufe" gratuito para que Minecraft acepte mods. Sin Fabric, el juego no sabe leer el mod de voz. Las guías de abajo lo instalan como parte de los pasos.</p>
+        </div>
+      </div>
+      <p class="voz-aviso">📌 Importante: nuestro servidor usa la versión <strong>1.21.11</strong>. Todo lo que instales tiene que decir <strong>1.21.11</strong> y <strong>Fabric</strong>. Y esto es <strong>solo para Java (PC)</strong> — en Bedrock (celu/tablet) no se pueden instalar mods, pero se juega igual sin voz.</p>
+    </section>
+
+    <section class="voz-seccion">
+      <h2>Paso 1 — Descargá los 2 archivos del mod</h2>
+      <div class="guia">
+        <ol>
+          <li>Entrá a la página del mod: <a href="https://modrinth.com/plugin/simple-voice-chat" target="_blank" rel="noopener"><strong>Simple Voice Chat en Modrinth</strong></a> y tocá el botón de descarga. Cuando te pregunte, elegí plataforma <strong>Fabric</strong> y versión de juego <strong>1.21.11</strong>. Te baja un archivo que termina en <code>.jar</code> — <strong>no lo abras</strong>, solo guardalo (por ejemplo en Descargas).</li>
+          <li>El mod necesita un ayudante para funcionar: descargá también <a href="https://modrinth.com/mod/fabric-api" target="_blank" rel="noopener"><strong>Fabric API</strong></a>, otra vez eligiendo <strong>Fabric</strong> y <strong>1.21.11</strong>. Es otro <code>.jar</code>.</li>
+        </ol>
+        <div class="descarga-fila">
+          <a class="btn btn-blue" href="https://modrinth.com/plugin/simple-voice-chat" target="_blank" rel="noopener">⬇ Simple Voice Chat</a>
+          <a class="btn btn-ghost" href="https://modrinth.com/mod/fabric-api" target="_blank" rel="noopener">⬇ Fabric API</a>
+        </div>
+      </div>
+      <p class="voz-aviso">Al final vas a tener <strong>2 archivos .jar</strong>. Los dos van a la misma carpeta en el paso siguiente.</p>
+    </section>
+
+    <section class="voz-seccion">
+      <h2 class="dorado">Paso 2, opción A — Si usás CurseForge</h2>
+      <div class="guia">
+        <ol>
+          <li>Abrí la aplicación de <strong>CurseForge</strong> (si no la tenés, se baja gratis de <a href="https://www.curseforge.com/download/app" target="_blank" rel="noopener">curseforge.com/download/app</a>).</li>
+          <li>Andá a la pestaña <strong>Minecraft</strong> y tocá <strong>Create Custom Profile</strong> (crear perfil personalizado).</li>
+          <li>Ponele un nombre (por ejemplo <em>ArgentinaCS</em>), elegí la versión <strong>1.21.11</strong> y en "Mod Loader" seleccioná <strong>Fabric</strong>. Creá el perfil.</li>
+          <li>Sobre el perfil nuevo, hacé clic derecho (o en los tres puntitos <strong>⋯</strong>) y elegí <strong>Open Folder</strong> (abrir carpeta).</li>
+          <li>Adentro buscá la carpeta <code>mods</code> — si no existe, creala con ese nombre exacto.</li>
+          <li>Copiá ahí los <strong>2 archivos .jar</strong> que descargaste en el Paso 1.</li>
+          <li>Volvé a CurseForge y tocá <strong>Play</strong> en ese perfil. ¡Listo!</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="voz-seccion">
+      <h2 class="dorado">Paso 2, opción B — Si usás TLauncher</h2>
+      <div class="guia">
+        <ol>
+          <li>Abrí <strong>TLauncher</strong> y mirá el selector de versiones (abajo, al lado del botón de entrar).</li>
+          <li>Desplegalo y buscá <strong>Fabric 1.21.11</strong> (aparece en la lista con el logo de Fabric). Seleccionala y tocá <strong>Instalar</strong> — esto instala el "enchufe" para mods.</li>
+          <li>Cuando termine, abrí la <strong>carpeta del juego</strong>: en TLauncher es el ícono de carpeta 📁 junto al selector (o apretá <code>Win + R</code>, escribí <code>%appdata%\.minecraft</code> y Enter).</li>
+          <li>Adentro buscá la carpeta <code>mods</code> — si no existe, creala con ese nombre exacto.</li>
+          <li>Copiá ahí los <strong>2 archivos .jar</strong> que descargaste en el Paso 1.</li>
+          <li>Volvé a TLauncher, verificá que la versión elegida siga siendo <strong>Fabric 1.21.11</strong> y entrá al juego. ¡Listo!</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="voz-seccion">
+      <h2>Paso 3 — Probalo en el servidor</h2>
+      <div class="guia">
+        <ol>
+          <li>Conectate como siempre a <code>45.235.98.41:25565</code>.</li>
+          <li>Si todo salió bien, al entrar vas a ver un <strong>ícono de micrófono</strong> en la pantalla.</li>
+          <li>Apretá la tecla <strong>V</strong>: se abre el menú de voz para elegir tu micrófono, ajustar volúmenes y activar o silenciar.</li>
+          <li>Acercate a alguien y hablá — te escuchan los que están cerca, y cuanto más lejos, más bajito.</li>
+        </ol>
+      </div>
+      <p class="voz-aviso">🔧 <strong>¿Algo no anda?</strong> Si el juego no abre, casi siempre faltó el segundo archivo (Fabric API) o descargaste otra versión — repasá que los dos digan Fabric y 1.21.11. Si no te escuchan, apretá <strong>V</strong> y revisá que esté elegido el micrófono correcto. Y si te trabás, pedinos una mano en el <a href="https://discord.gg/argentinacs" target="_blank" rel="noopener">Discord</a> con gusto.</p>
+    </section>
+
+    <div class="voz-volver">
+      <a class="btn btn-blue" href="minecraft.html">← Volver a la info del servidor</a>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 Comunidad ArgentinaCS — Llevando juego a la vida de todos.</p>
+      <p class="footer-credit">Sitio creado por Manuka</p>
+    </div>
+  </footer>
+
+  <script src="assets/main.js"></script>
+</body>
+</html>

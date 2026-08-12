@@ -42,11 +42,15 @@
     .mcx-section > p.intro { text-align: center; color: var(--muted); max-width: 620px; margin: 0 auto 18px; font-size: 0.95rem; }
 
     /* Resumen */
-    .resumen-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; max-width: 980px; margin: 18px auto 0; }
+    .resumen-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 980px; margin: 18px auto 0; }
+    @media (max-width: 700px) { .resumen-grid { grid-template-columns: repeat(2, 1fr); } }
     .resumen-item {
-      text-align: center; background: linear-gradient(180deg, var(--panel-2), var(--panel));
-      border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 12px;
+      display: block; text-align: center; background: linear-gradient(180deg, var(--panel-2), var(--panel));
+      border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 12px; color: inherit;
     }
+    a.resumen-item { transition: border-color 0.15s, transform 0.12s; }
+    a.resumen-item:hover { border-color: rgba(47, 155, 255, 0.5); transform: translateY(-2px); }
+    a.resumen-item .d { color: var(--blue-soft); }
     .resumen-item .ico { font-size: 1.5rem; }
     .resumen-item .t { font-weight: 800; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.03em; margin-top: 6px; }
     .resumen-item .d { color: var(--muted); font-size: 0.8rem; margin-top: 3px; }
@@ -79,11 +83,13 @@
     .piedra .t { font-weight: 900; font-size: 1.05rem; color: var(--gold-soft); }
     .piedra .d { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
 
-    .vip-tabla { max-width: 660px; margin: 0 auto; border-collapse: collapse; width: 100%; }
-    .vip-tabla th, .vip-tabla td { padding: 9px 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.06); font-size: 0.93rem; }
+    .vip-tabla { max-width: 760px; margin: 0 auto; border-collapse: collapse; width: 100%; }
+    .vip-tabla th, .vip-tabla td { padding: 9px 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.06); font-size: 0.93rem; }
     .vip-tabla th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); text-align: left; }
-    .vip-tabla td:nth-child(2), .vip-tabla td:nth-child(3), .vip-tabla th:nth-child(2), .vip-tabla th:nth-child(3) { text-align: center; }
-    .vip-tabla td:nth-child(3) { color: var(--gold-soft); font-weight: 700; }
+    .vip-tabla td:nth-child(2), .vip-tabla td:nth-child(3), .vip-tabla td:nth-child(4),
+    .vip-tabla th:nth-child(2), .vip-tabla th:nth-child(3), .vip-tabla th:nth-child(4) { text-align: center; }
+    .vip-tabla td:nth-child(2) { color: var(--red); opacity: 0.85; }
+    .vip-tabla td:nth-child(4) { color: var(--gold-soft); font-weight: 700; }
     .vip-tabla tr:last-child td { border-bottom: none; }
     .panelizado {
       background: linear-gradient(180deg, var(--panel-2), var(--panel));
@@ -128,6 +134,7 @@
           <div class="sub-menu">
             <a href="minecraft.html">ℹ️ Conocé el servidor</a>
             <a href="novedades.html">🗞️ Novedades</a>
+            <a href="voz.html">🎙️ Instalar chat de voz</a>
           </div>
         </div>
         <a href="tienda.html">Tienda</a>
@@ -154,7 +161,7 @@
         <div class="resumen-item"><div class="ico">📱</div><div class="t">Java + Bedrock</div><div class="d">Mismo mundo</div></div>
         <div class="resumen-item"><div class="ico">🎁</div><div class="t">VIP gratis 3 días</div><div class="d">Al entrar por primera vez</div></div>
         <div class="resumen-item"><div class="ico">📈</div><div class="t">Habilidades</div><div class="d">Progresás por jugar</div></div>
-        <div class="resumen-item"><div class="ico">🎙️</div><div class="t">Voz por proximidad</div><div class="d">Con mod opcional</div></div>
+        <a class="resumen-item" href="voz.html"><div class="ico">🎙️</div><div class="t">Voz por proximidad</div><div class="d">Cómo instalarla →</div></a>
         <div class="resumen-item"><div class="ico">🛒</div><div class="t">Tienda automática</div><div class="d">QR y entrega al instante</div></div>
       </div>
     </div>
@@ -250,6 +257,7 @@
           <div class="ico">🎙️</div>
           <h3>Chat de voz por proximidad</h3>
           <p>Escuchás a los que están cerca tuyo en el juego, como en la vida real. Con el mod <strong>Simple Voice Chat</strong> (opcional — sin el mod jugás igual).</p>
+          <p style="margin-top:8px"><a href="voz.html">📖 Guía de instalación paso a paso, desde cero →</a></p>
         </div>
       </div>
     </section>
@@ -264,19 +272,19 @@
       <p class="intro">Ya lo probaste gratis los primeros 3 días — esto es todo lo que incluye:</p>
       <div class="panelizado">
         <table class="vip-tabla">
-          <tr><th>Beneficio</th><th>Común</th><th>VIP</th></tr>
-          <tr><td>Piedras de protección colocadas</td><td>2</td><td>7</td></tr>
-          <tr><td>Casas (<span style="font-family:Consolas,monospace">/sethome</span>)</td><td>3</td><td>5</td></tr>
-          <tr><td><span style="font-family:Consolas,monospace">/back</span> — volver a donde moriste</td><td>—</td><td>✔</td></tr>
-          <tr><td>Visión nocturna (<span style="font-family:Consolas,monospace">/nv</span>)</td><td>—</td><td>✔</td></tr>
-          <tr><td>VeinMiner — picá toda la veta de una vez</td><td>—</td><td>✔</td></tr>
-          <tr><td>Silk Spawner — mové spawners con Toque de Seda</td><td>—</td><td>✔</td></tr>
-          <tr><td>Elytra Fusion — elytra + pechera en una</td><td>—</td><td>✔</td></tr>
-          <tr><td>Experiencia de habilidades</td><td>normal</td><td>+5%</td></tr>
-          <tr><td>Piedra de Protección 32 de regalo</td><td>—</td><td>✔</td></tr>
+          <tr><th>Beneficio</th><th>Otros servidores</th><th>Acá, común</th><th>Acá, VIP</th></tr>
+          <tr><td>Piedras de protección colocadas</td><td>✗</td><td>2</td><td>7</td></tr>
+          <tr><td>Casas (<span style="font-family:Consolas,monospace">/sethome</span>)</td><td>✗</td><td>3</td><td>5</td></tr>
+          <tr><td><span style="font-family:Consolas,monospace">/back</span> — volver a donde moriste</td><td>✗</td><td>—</td><td>✔</td></tr>
+          <tr><td>Visión nocturna (<span style="font-family:Consolas,monospace">/nv</span>)</td><td>✗</td><td>—</td><td>✔</td></tr>
+          <tr><td>VeinMiner — picá toda la veta de una vez</td><td>✗</td><td>—</td><td>✔</td></tr>
+          <tr><td>Silk Spawner — mové spawners con Toque de Seda</td><td>✗</td><td>—</td><td>✔</td></tr>
+          <tr><td>Elytra Fusion — elytra + pechera en una</td><td>✗</td><td>—</td><td>✔</td></tr>
+          <tr><td>Experiencia de habilidades</td><td>✗</td><td>normal</td><td>+5%</td></tr>
+          <tr><td>Piedra de Protección 32 de regalo</td><td>✗</td><td>—</td><td>✔</td></tr>
         </table>
       </div>
-      <p class="mcx-aviso">⭐ Se contrata con <code>/vip</code> dentro del juego y dura 30 días.</p>
+      <p class="mcx-aviso">⭐ Se contrata con <code>/vip</code> dentro del juego (pago con QR de MercadoPago, solo desde Argentina — desde el exterior hablá con un staff) y dura 30 días.</p>
     </section>
 
     <section class="mcx-section">
@@ -290,7 +298,7 @@
         <div class="info-card">
           <div class="ico">📱</div>
           <h3>Pago con QR de MercadoPago</h3>
-          <p>Tocás el producto, escaneás el QR con MercadoPago, MODO o tu banco, y listo.</p>
+          <p>Tocás el producto, escaneás el QR con MercadoPago, MODO o tu banco, y listo. Válido para pagos desde Argentina.</p>
         </div>
         <div class="info-card">
           <div class="ico">⚡</div>
@@ -298,6 +306,7 @@
           <p>Apenas se acredita el pago, recibís el producto dentro del juego al instante. Sin esperar al staff, a cualquier hora.</p>
         </div>
       </div>
+      <p class="mcx-aviso">🌍 El pago con QR funciona <strong>solo desde Argentina</strong>. ¿Estás en otro país y querés contratar algo? Hablá con un staff en el <a href="https://discord.gg/argentinacs" target="_blank" rel="noopener">Discord</a> y lo resolvemos.</p>
     </section>
 
     <div class="mcx-cta">
