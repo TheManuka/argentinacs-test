@@ -160,9 +160,33 @@
     }
   }
 
+  /* Video de fondo sutil. Se inyecta por JS a propósito: sin JS, o con
+     "reducir animaciones" activado, queda la imagen estática de siempre. */
+  function initVideoFondo() {
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var v = document.createElement("video");
+    v.className = "bg-video";
+    v.muted = true;
+    v.loop = true;
+    v.autoplay = true;
+    v.setAttribute("muted", "");
+    v.setAttribute("playsinline", "");
+    v.setAttribute("aria-hidden", "true");
+    v.src = "assets/fondo-video.mp4";
+    document.body.insertBefore(v, document.body.firstChild);
+    var marcar = function () { document.body.classList.add("con-video"); };
+    var p = v.play();
+    if (p && p.then) {
+      p.then(marcar).catch(function () { v.remove(); });
+    } else {
+      marcar();
+    }
+  }
+
   function init() {
     initCopyTargets();
     initLiveStatus();
+    initVideoFondo();
   }
 
   if (document.readyState === "loading") {

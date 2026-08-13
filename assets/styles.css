@@ -55,6 +55,21 @@ body::before {
   pointer-events: none;
 }
 
+/* Video de fondo sutil (lo inyecta main.js; mientras reproduce
+   reemplaza a la imagen estática para que no se superpongan) */
+.bg-video {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+body.con-video::before { display: none; }
+
 img, svg { max-width: 100%; display: block; }
 
 a { color: var(--blue-soft); text-decoration: none; }
