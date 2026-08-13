@@ -42,7 +42,8 @@ body {
   min-height: 100vh;
 }
 
-/* Imagen de fondo: centrada, fija (no scrollea) y casi invisible */
+/* Imagen de fondo estática (fotograma del video del logo): respaldo
+   para cuando el video no puede reproducirse. Misma opacidad que el video. */
 body::before {
   content: "";
   position: fixed;
@@ -50,8 +51,7 @@ body::before {
   z-index: -1;
   background: url("fondo.jpg") center no-repeat;
   background-size: cover;
-  opacity: 0.12;
-  filter: grayscale(1);
+  opacity: 0.09;
   pointer-events: none;
 }
 
