@@ -64,7 +64,7 @@ body::before {
   height: 100%;
   object-fit: cover;
   z-index: -1;
-  opacity: 0.22;
+  opacity: 0.13; /* 0.22 - 40% adicional */
   pointer-events: none;
 }
 
