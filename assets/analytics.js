@@ -1,14 +1,18 @@
 /* ArgentinaCS — medición de visitas (Google Analytics 4)
    ---------------------------------------------------------------
-   Para activarlo: pegá abajo el ID de medición de Google Analytics
-   (lo ves en Analytics → Administrar → Flujos de datos, con formato
-   G-XXXXXXXXXX). Mientras diga G-XXXXXXXXXX no se carga nada.
+   Este archivo reemplaza al fragmento que da Google: alcanza con
+   enlazarlo en el <head> de cada página nueva del sitio:
+
+       <script src="assets/analytics.js" defer></script>
+
+   NO pegar además el fragmento de Google en las páginas: quedarían
+   dos etiquetas midiendo lo mismo.
    --------------------------------------------------------------- */
 
 (function () {
   "use strict";
 
-  var ID = "G-XXXXXXXXXX";
+  var ID = "G-JEPZSSVJ3L";
 
   // Sin ID configurado, el sitio funciona igual y no se mide nada.
   if (!/^G-[A-Z0-9]{6,}$/.test(ID)) return;
