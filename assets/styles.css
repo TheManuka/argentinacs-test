@@ -182,7 +182,9 @@ a:hover { text-decoration: none; }
   position: absolute;
   top: 100%;
   left: 0;
-  min-width: 215px;
+  width: max-content;
+  min-width: 100%;
+  max-width: calc(100vw - 24px);
   background: rgba(13, 16, 23, 0.97);
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -202,6 +204,7 @@ a:hover { text-decoration: none; }
   font-size: 0.9rem;
   padding: 9px 12px;
   border-radius: 8px;
+  white-space: nowrap;
 }
 
 .sub-menu a:hover { background: rgba(255, 255, 255, 0.08); }
@@ -851,6 +854,10 @@ a:hover { text-decoration: none; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 640px) {
+  /* en pantallas chicas el menú se centra: los desplegables también,
+     para que no se salgan por el borde derecho */
+  .sub-menu { left: 50%; transform: translateX(-50%); }
+
   .hero { padding: 48px 0 40px; }
   .server-main { flex-wrap: wrap; }
   .server-actions { width: 100%; }
