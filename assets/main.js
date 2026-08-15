@@ -174,13 +174,36 @@
     v.setAttribute("aria-hidden", "true");
     v.src = "assets/fondo-video.mp4";
     document.body.insertBefore(v, document.body.firstChild);
-    var marcar = function () { document.body.classList.add("con-video"); };
-    var p = v.play();
-    if (p && p.then) {
-      p.then(marcar).catch(function () { v.remove(); });
-    } else {
-      marcar();
+
+    // La imagen estática se oculta recién cuando el video arranca de verdad.
+    v.addEventListener("playing", function () {
+      document.body.classList.add("con-video");
+    });
+
+    function intentarReproducir() {
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {});
     }
+
+    intentarReproducir();
+
+    // Si el navegador bloquea la reproducción automática, se reintenta en
+    // cuanto la persona interactúa con la página (mientras tanto se ve la
+    // imagen estática, así que nunca queda un fondo vacío).
+    var eventos = ["pointerdown", "keydown", "touchstart", "scroll"];
+    function reintento() {
+      if (!v.paused) return quitarEscuchas();
+      intentarReproducir();
+    }
+    function quitarEscuchas() {
+      for (var i = 0; i < eventos.length; i++) {
+        window.removeEventListener(eventos[i], reintento);
+      }
+    }
+    for (var i = 0; i < eventos.length; i++) {
+      window.addEventListener(eventos[i], reintento, { passive: true });
+    }
+    v.addEventListener("playing", quitarEscuchas);
   }
 
   function init() {
