@@ -767,6 +767,29 @@ a:hover { text-decoration: none; }
 
 .reg-cierre { text-align: center; padding: 34px 0 20px; }
 
+/* Índice de secciones (reglamentos largos) */
+.reg-indice {
+  background: linear-gradient(180deg, var(--panel-2), var(--panel));
+  border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 18px 20px; margin-top: 22px;
+}
+.reg-indice .titulo {
+  font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--muted); margin-bottom: 10px; text-align: center;
+}
+.reg-indice ol {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 4px 14px;
+}
+.reg-indice a {
+  display: block; color: var(--text); font-size: 0.88rem; font-weight: 600;
+  padding: 5px 8px; border-radius: 8px;
+}
+.reg-indice a:hover { background: rgba(255, 255, 255, 0.07); color: var(--blue-soft); }
+
+.reg-seccion[id] { scroll-margin-top: 90px; }
+.reg-seccion > h2 .num { color: var(--muted); font-weight: 700; margin-right: 4px; }
+
 /* ---------- Toast ---------- */
 .toast {
   position: fixed;
