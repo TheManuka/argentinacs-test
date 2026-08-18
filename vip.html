@@ -29,46 +29,14 @@
   <style>
     .vip-hero { text-align: center; padding: 52px 0 10px; }
     .vip-hero h1 { font-size: clamp(1.8rem, 5vw, 3rem); margin-bottom: 12px; }
-    .vip-hero .sub { color: var(--muted); max-width: 620px; margin: 0 auto; }
+    .vip-hero .sub { color: var(--muted); max-width: 640px; margin: 0 auto; }
 
-    .vip-opciones {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 18px; max-width: 900px; margin: 32px auto 10px;
-    }
-    .vip-op {
-      display: flex; flex-direction: column; text-align: center;
-      background: linear-gradient(180deg, var(--panel-2), var(--panel));
-      border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 30px 26px; color: var(--text);
-      transition: border-color .15s, transform .12s, box-shadow .15s;
-    }
-    .vip-op:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
-    .vip-op.cs:hover { border-color: rgba(255,182,30,.55); }
-    .vip-op.mc:hover { border-color: rgba(47,155,255,.55); }
-    .vip-op .ico { font-size: 2.6rem; margin-bottom: 10px; }
-    .vip-op h2 { font-weight: 900; font-style: italic; text-transform: uppercase; font-size: 1.35rem; }
-    .vip-op.cs h2 { color: var(--gold); }
-    .vip-op.mc h2 { color: var(--blue); }
-    .vip-op .desc { color: var(--muted); font-size: .93rem; margin: 8px 0 16px; }
-    .vip-lista { list-style: none; padding: 0; margin: 0 0 20px; text-align: left; }
-    .vip-lista li { color: var(--muted); font-size: .9rem; padding: 5px 0 5px 24px; position: relative; }
-    .vip-lista li::before { content: "✔"; position: absolute; left: 4px; color: #6ee7a0; font-size: .85rem; }
-    .vip-op .btn { margin-top: auto; }
-
-    .wa-botones { display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
-    .btn-wa {
-      background: linear-gradient(135deg, #2ee06a, #25d366 55%, #128c7e);
-      color: #06210f; font-size: .9rem; letter-spacing: .01em;
-      box-shadow: 0 6px 24px rgba(37, 211, 102, .22);
-    }
-    .wa-ico { display: inline-flex; width: 18px; height: 18px; }
-    .wa-ico svg { width: 100%; height: 100%; fill: currentColor; }
-    /* ---- Planes de Counter-Strike ---- */
-    .cs-planes { max-width: 900px; margin: 58px auto 0; scroll-margin-top: 90px; }
+    .bloque { max-width: 900px; margin: 50px auto 0; scroll-margin-top: 90px; }
     .planes-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 18px; align-items: stretch; margin-top: 8px;
     }
+    .planes-grid.solo-uno { max-width: 440px; margin-inline: auto; }
     .plan {
       position: relative; display: flex; flex-direction: column;
       background: linear-gradient(180deg, var(--panel-2), var(--panel));
@@ -76,6 +44,7 @@
     }
     .plan.vip { border-color: rgba(255,182,30,.5); box-shadow: 0 10px 40px rgba(255,182,30,.08); }
     .plan.admin { border-color: rgba(47,155,255,.38); }
+    .plan.mc { border-color: rgba(47,155,255,.5); box-shadow: 0 10px 40px rgba(47,155,255,.07); }
     .plan-badge {
       position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
       background: linear-gradient(135deg, var(--gold), var(--gold-deep));
@@ -87,14 +56,14 @@
       font-size: 1.3rem; text-align: center; margin: 0;
     }
     .plan.vip h3 { color: var(--gold); }
-    .plan.admin h3 { color: var(--blue); }
+    .plan.admin h3, .plan.mc h3 { color: var(--blue); }
     .plan-sub { color: var(--muted); font-size: .82rem; text-align: center; margin: 6px 0 0; }
     .plan-precio {
       text-align: center; font-weight: 900; font-style: italic;
       font-size: 2rem; margin: 14px 0 2px; line-height: 1;
     }
     .plan.vip .plan-precio { color: var(--gold); }
-    .plan.admin .plan-precio { color: var(--blue); }
+    .plan.admin .plan-precio, .plan.mc .plan-precio { color: var(--blue); }
     .plan-precio small { font-size: .78rem; font-weight: 700; font-style: normal; color: var(--muted); }
     .plan ul {
       list-style: none; padding: 0; margin: 18px 0 0;
@@ -106,13 +75,30 @@
     }
     .plan li::before { content: "✔"; position: absolute; left: 2px; top: 6px; font-size: .82rem; color: #6ee7a0; }
     .plan li em { font-style: normal; color: var(--text); }
+    .plan li code, .plan-botones code { font-family: Consolas, monospace; font-size: .95em; }
+    .plan-botones { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
 
-    .wa-bloque { max-width: 460px; margin: 28px auto 0; text-align: center; }
+    .nota-admin {
+      max-width: 900px; margin: 18px auto 0; padding: 13px 18px;
+      background: rgba(47,155,255,.06); border: 1px solid rgba(47,155,255,.22);
+      border-radius: var(--radius); color: var(--muted); font-size: .88rem; line-height: 1.55;
+    }
+    .nota-admin strong { color: var(--blue-soft); }
+
+    .wa-bloque { max-width: 440px; margin: 26px auto 0; text-align: center; }
     .wa-bloque > p { color: var(--muted); font-size: .9rem; margin-bottom: 12px; }
-    .ver-mas { text-align: center; margin-top: 22px; font-size: .92rem; color: var(--muted); }
+    .wa-botones { display: flex; flex-direction: column; gap: 10px; }
+    .btn-wa {
+      background: linear-gradient(135deg, #2ee06a, #25d366 55%, #128c7e);
+      color: #06210f; font-size: .9rem; letter-spacing: .01em;
+      box-shadow: 0 6px 24px rgba(37, 211, 102, .22);
+    }
+    .wa-ico { display: inline-flex; width: 18px; height: 18px; }
+    .wa-ico svg { width: 100%; height: 100%; fill: currentColor; }
 
+    .ver-mas { text-align: center; margin-top: 22px; font-size: .92rem; color: var(--muted); }
     .vip-nota {
-      max-width: 760px; margin: 26px auto 40px; padding: 14px 20px; text-align: center;
+      max-width: 760px; margin: 34px auto 40px; padding: 14px 20px; text-align: center;
       background: rgba(255,182,30,.07); border: 1px dashed rgba(255,182,30,.4);
       border-radius: var(--radius); color: var(--muted); font-size: .92rem;
     }
@@ -181,42 +167,10 @@
     <div class="vip-hero">
       <a class="btn btn-ghost" href="index.html">&#8592; Volver al inicio</a>
       <h1 class="display">⭐ Contratá tu <span class="text-gold">VIP</span></h1>
-      <p class="sub">Elegí en qué juego lo querés y te mostramos cómo hacerlo, paso a paso.</p>
+      <p class="sub">Hay uno para cada juego. Acá abajo está todo lo que incluye cada uno y cómo se contrata.</p>
     </div>
 
-    <div class="vip-opciones">
-
-      <div class="vip-op mc">
-        <div class="ico">⛏️</div>
-        <h2>Minecraft</h2>
-        <p class="desc">Se contrata solo, desde adentro del juego, y se activa al instante.</p>
-        <ul class="vip-lista">
-          <li>7 piedras de protección (en vez de 2)</li>
-          <li>5 casas guardadas (en vez de 3)</li>
-          <li>Volver a donde moriste con <code>/back</code></li>
-          <li>Visión nocturna, VeinMiner y Silk Spawner</li>
-          <li>Elytra Fusion y +5% de experiencia</li>
-          <li>Piedra de Protección de regalo</li>
-        </ul>
-        <a class="btn btn-blue" href="servidor-minecraft-survival.html#vip">Ver beneficios y cómo contratarlo</a>
-      </div>
-
-      <div class="vip-op cs">
-        <div class="ico">🎯</div>
-        <h2>Counter-Strike 1.6</h2>
-        <p class="desc">Elegí <strong>VIP</strong> o <strong>ADMIN</strong>. Te lo activa el staff, hablando por WhatsApp.</p>
-        <ul class="vip-lista">
-          <li>Slot reservado: entrás siempre, aunque esté lleno</li>
-          <li>Tu nombre queda protegido, nadie más lo usa</li>
-          <li>Rol destacado dentro de la comunidad</li>
-          <li>Skin de personaje exclusiva del rango</li>
-        </ul>
-        <a class="btn btn-gold" href="#cs">Ver los dos planes</a>
-      </div>
-
-    </div>
-
-    <section class="cs-planes" id="cs">
+    <section class="bloque" id="cs">
 
       <div class="section-head" style="margin-bottom:0">
         <h2 class="display"><span class="text-gold">VIP</span> y <span class="text-blue">Admin</span> en Counter-Strike 1.6</h2>
@@ -258,25 +212,56 @@
 
       </div>
 
+      <p class="nota-admin">🔒 <strong>El Admin no se contrata de entrada.</strong> Primero hay que haber sido VIP, aunque sea un mes: así te conocemos jugando antes de darte comandos de administración. Y aun cumpliendo ese requisito, la comunidad puede rechazar un pedido de Admin por cualquier motivo.</p>
+
       <div class="wa-bloque">
         <p>Tocá el botón y se abre WhatsApp con el mensaje listo para enviar:</p>
         <div class="wa-botones">
-          <a class="btn btn-wa" href="https://wa.me/5493834917268?text=Hola!%20%F0%9F%91%8B%F0%9F%8F%BB%0ABusco%20contratar%20VIP" target="_blank" rel="noopener">
-            <span class="wa-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-            </span>
-            +54 9 383 491-7268
-          </a>
-          <a class="btn btn-wa" href="https://wa.me/5493624509937?text=Hola!%20%F0%9F%91%8B%F0%9F%8F%BB%0ABusco%20contratar%20VIP" target="_blank" rel="noopener">
-            <span class="wa-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-            </span>
-            +54 9 362 450-9937
-          </a>
+        <a class="btn btn-wa" href="https://wa.me/5493834917268?text=Hola!%20%F0%9F%91%8B%F0%9F%8F%BB%0ABusco%20contratar%20VIP" target="_blank" rel="noopener">
+          <span class="wa-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          </span>
+          +54 9 383 491-7268
+        </a>
+        <a class="btn btn-wa" href="https://wa.me/5493624509937?text=Hola!%20%F0%9F%91%8B%F0%9F%8F%BB%0ABusco%20contratar%20VIP" target="_blank" rel="noopener">
+          <span class="wa-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          </span>
+          +54 9 362 450-9937
+        </a>
         </div>
       </div>
 
       <p class="ver-mas">¿Querés ver también qué incluye el rango gratis y cómo se compara con el de otras comunidades? <a href="beneficios-counter-strike.html">Mirá la comparativa completa</a>.</p>
+
+    </section>
+
+    <section class="bloque" id="minecraft">
+
+      <div class="section-head" style="margin-bottom:0">
+        <h2 class="display"><span class="text-blue">VIP</span> en Minecraft</h2>
+        <p class="sub">Este se contrata solo, sin hablar con nadie: lo pagás desde adentro del juego con <code>/compras</code> y se activa al instante.</p>
+      </div>
+
+      <div class="planes-grid solo-uno">
+        <article class="plan mc">
+          <h3>VIP</h3>
+          <p class="plan-sub">30 días en el servidor de Survival</p>
+          <p class="plan-precio">$3.000 <small>/ mes</small></p>
+          <ul>
+            <li><em>7 piedras de protección</em>, en vez de 2</li>
+            <li><em>5 casas guardadas</em>, en vez de 3</li>
+            <li>Volver a donde moriste con <code>/back</code></li>
+            <li>Visión nocturna, VeinMiner y Silk Spawner</li>
+            <li>Elytra Fusion y <em>+5% de experiencia</em></li>
+            <li>Una <em>Piedra de Protección de regalo</em> en cada compra</li>
+          </ul>
+          <div class="plan-botones">
+            <a class="btn btn-blue" href="servidor-minecraft-survival.html#vip">Ver todos los beneficios</a>
+            <a class="btn btn-ghost" href="servidor-minecraft-survival.html#tienda">Ver el catálogo de <code>/compras</code></a>
+          </div>
+        </article>
+      </div>
 
     </section>
 
