@@ -77,13 +77,14 @@ def html_catalogo(grupos, meta):
         out.append('        <div class="cat-grupo">')
         out.append("          <h3>%s</h3>" % esc_html(sec["web"]))
         out.append('          <ul class="cat-lista">')
-        for _codigo, titulo, _precio, info in grupos[sec["id"]]:
+        for _codigo, titulo, precio, info in grupos[sec["id"]]:
             nombre = esc_html(info.get("web_nombre", titulo))
             detalle = info.get("web_detalle", "")
+            texto = "<strong>%s</strong>" % nombre
             if detalle:
-                out.append("            <li><strong>%s</strong> — %s</li>" % (nombre, esc_html(detalle)))
-            else:
-                out.append("            <li><strong>%s</strong></li>" % nombre)
+                texto += " — %s" % esc_html(detalle)
+            out.append('            <li><span>%s</span><span class="cat-precio">$%s</span></li>'
+                       % (texto, miles(precio)))
         out.append("          </ul>")
         out.append("        </div>")
         if i < len(secciones_con_items) - 1:

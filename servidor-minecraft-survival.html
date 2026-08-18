@@ -138,8 +138,10 @@
     .cat-lista li {
       background: rgba(0,0,0,.25); border: 1px solid var(--border); border-radius: 10px;
       padding: 9px 14px; color: var(--muted); font-size: .9rem;
+      display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
     }
     .cat-lista li strong { color: #fff; font-weight: 700; }
+    .cat-precio { color: var(--gold-soft); font-weight: 800; white-space: nowrap; }
     .mcx-cta { text-align: center; padding: 40px 0 20px; }
     .mcx-cta .mc-ip { max-width: 340px; margin: 12px auto; }
   </style>
@@ -374,7 +376,7 @@
         <div class="info-card">
           <div class="ico">🛒</div>
           <h3>Comprás sin salir del juego</h3>
-          <p>Con <code>/compras</code> ves el catálogo completo: VIP, Piedras de Protección, spawners y packs. Los precios actualizados están siempre ahí.</p>
+          <p>Con <code>/compras</code> ves el catálogo completo: VIP, Piedras de Protección, spawners y packs, con el precio de cada cosa.</p>
         </div>
         <div class="info-card">
           <div class="ico">📱</div>
@@ -388,58 +390,58 @@
         </div>
       </div>
 
-      <p class="intro" style="margin-top:22px">Esto es todo lo que podés comprar hoy:</p>
+      <p class="intro" style="margin-top:22px">Esto es todo lo que podés comprar hoy, con su precio:</p>
       <div class="catalogo">
         <div class="cat-grupo">
           <h3>⭐ VIP</h3>
           <ul class="cat-lista">
-            <li><strong>VIP 30 días</strong> — incluye Piedra de Protección de regalo</li>
-            <li><strong>VIP 2 meses</strong> — incluye Piedra de Protección de regalo</li>
+            <li><span><strong>VIP 30 días</strong> — incluye Piedra de Protección de regalo</span><span class="cat-precio">$3.000</span></li>
+            <li><span><strong>VIP 2 meses</strong> — incluye Piedra de Protección de regalo</span><span class="cat-precio">$6.000</span></li>
           </ul>
         </div>
 
         <div class="cat-grupo">
           <h3>🛡️ Piedras de Protección</h3>
           <ul class="cat-lista">
-            <li><strong>Piedra de Hierro 32</strong> — 16×16</li>
-            <li><strong>Piedra de Diamante 64</strong> — 32×32</li>
-            <li><strong>Piedra de Esmeralda 128</strong> — 64×64</li>
-            <li><strong>Piedra de Netherite 256</strong> — 128×128</li>
+            <li><span><strong>Piedra de Hierro 32</strong> — 16×16</span><span class="cat-precio">$4.500</span></li>
+            <li><span><strong>Piedra de Diamante 64</strong> — 32×32</span><span class="cat-precio">$6.000</span></li>
+            <li><span><strong>Piedra de Esmeralda 128</strong> — 64×64</span><span class="cat-precio">$9.500</span></li>
+            <li><span><strong>Piedra de Netherite 256</strong> — 128×128</span><span class="cat-precio">$13.000</span></li>
           </ul>
         </div>
 
         <div class="cat-grupo">
           <h3>🥚 Spawners</h3>
           <ul class="cat-lista">
-            <li><strong>Spawner de Zombie</strong></li>
-            <li><strong>Spawner de Esqueleto</strong></li>
-            <li><strong>Spawner de Araña</strong></li>
-            <li><strong>Spawner de Creeper</strong></li>
-            <li><strong>Spawner de Blaze</strong></li>
-            <li><strong>Spawner de Enderman</strong></li>
-            <li><strong>Spawner de Aldeano</strong></li>
-            <li><strong>Spawner de Wither Skeleton</strong></li>
+            <li><span><strong>Spawner de Zombie</strong></span><span class="cat-precio">$4.999</span></li>
+            <li><span><strong>Spawner de Esqueleto</strong></span><span class="cat-precio">$5.999</span></li>
+            <li><span><strong>Spawner de Araña</strong></span><span class="cat-precio">$5.999</span></li>
+            <li><span><strong>Spawner de Creeper</strong></span><span class="cat-precio">$7.999</span></li>
+            <li><span><strong>Spawner de Blaze</strong></span><span class="cat-precio">$11.999</span></li>
+            <li><span><strong>Spawner de Enderman</strong></span><span class="cat-precio">$15.999</span></li>
+            <li><span><strong>Spawner de Aldeano</strong></span><span class="cat-precio">$21.999</span></li>
+            <li><span><strong>Spawner de Wither Skeleton</strong></span><span class="cat-precio">$28.999</span></li>
           </ul>
         </div>
 
         <div class="cat-grupo">
           <h3>📦 Packs (combos con descuento)</h3>
           <ul class="cat-lista">
-            <li><strong>Pack Hierro</strong> — 2 meses VIP + Spawner de Zombie</li>
-            <li><strong>Pack Oro</strong> — 2 meses VIP + Spawner de Esqueleto</li>
-            <li><strong>Pack Redstone</strong> — 2 meses VIP + Spawner de Araña</li>
-            <li><strong>Pack Creeper</strong> — 2 meses VIP + Spawner de Creeper</li>
-            <li><strong>Pack Blaze</strong> — VIP + Spawner de Blaze + Piedra 32</li>
-            <li><strong>Pack End</strong> — VIP + Spawner de Enderman + Piedra 64</li>
-            <li><strong>Pack Aldeano</strong> — VIP + Spawner de Aldeano + Piedra 128</li>
-            <li><strong>Pack Wither</strong> — VIP + Spawner de Wither Skeleton + Piedra 256</li>
-            <li><strong>Pack Supremo</strong> — VIP + Aldeano + Blaze + Piedra 256</li>
-            <li><strong>Pack Leyenda</strong> — VIP + Wither Skeleton + Aldeano + Piedra 256</li>
+            <li><span><strong>Pack Hierro</strong> — 2 meses VIP + Spawner de Zombie</span><span class="cat-precio">$9.999</span></li>
+            <li><span><strong>Pack Oro</strong> — 2 meses VIP + Spawner de Esqueleto</span><span class="cat-precio">$10.999</span></li>
+            <li><span><strong>Pack Redstone</strong> — 2 meses VIP + Spawner de Araña</span><span class="cat-precio">$10.999</span></li>
+            <li><span><strong>Pack Creeper</strong> — 2 meses VIP + Spawner de Creeper</span><span class="cat-precio">$12.999</span></li>
+            <li><span><strong>Pack Blaze</strong> — VIP + Spawner de Blaze + Piedra 32</span><span class="cat-precio">$17.999</span></li>
+            <li><span><strong>Pack End</strong> — VIP + Spawner de Enderman + Piedra 64</span><span class="cat-precio">$21.999</span></li>
+            <li><span><strong>Pack Aldeano</strong> — VIP + Spawner de Aldeano + Piedra 128</span><span class="cat-precio">$27.999</span></li>
+            <li><span><strong>Pack Wither</strong> — VIP + Spawner de Wither Skeleton + Piedra 256</span><span class="cat-precio">$34.999</span></li>
+            <li><span><strong>Pack Supremo</strong> — VIP + Aldeano + Blaze + Piedra 256</span><span class="cat-precio">$44.999</span></li>
+            <li><span><strong>Pack Leyenda</strong> — VIP + Wither Skeleton + Aldeano + Piedra 256</span><span class="cat-precio">$54.999</span></li>
           </ul>
         </div>
       </div>
 
-      <p class="mcx-aviso">💰 Los <strong>precios actualizados</strong> están siempre dentro del juego, en <code>/compras</code>.</p>
+      <p class="mcx-aviso">💰 Esta lista <strong>se actualiza sola todos los días</strong>. Si alguna vez ves una diferencia, el precio que vale es el de <code>/compras</code> dentro del juego.</p>
       <p class="mcx-aviso">🌍 El pago con QR funciona <strong>solo desde Argentina</strong>. ¿Estás en otro país y querés contratar algo? Hablá con un staff en el <a href="https://discord.gg/argentinacs" target="_blank" rel="noopener">Discord</a> y lo resolvemos.</p>
     </section>
 
