@@ -1,0 +1,62 @@
+name: Sincronizar tienda de Minecraft
+
+# Revisa una vez por dia si cambiaron los productos o precios de la tienda
+# y actualiza el sitio web y el menu /compras del servidor.
+# Corre en los servidores de GitHub: funciona con la computadora apagada.
+
+on:
+  schedule:
+    # 07:20 UTC = 04:20 en Argentina, justo antes del reinicio diario del
+    # servidor (04:59), asi el menu nuevo se carga solo al reiniciar.
+    - cron: '20 7 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tienda
+  cancel-in-progress: false
+
+jobs:
+  sincronizar:
+    if: github.repository == 'acesino25/argentinacs-landing'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Bajar la rama main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Preparar herramientas
+        run: pip install --quiet pyyaml
+
+      - name: Revisar la tienda y aplicar cambios
+        id: sync
+        env:
+          TIENDA_CSV_URL: ${{ secrets.TIENDA_CSV_URL }}
+          MC_SFTP_USER: ${{ secrets.MC_SFTP_USER }}
+          MC_SFTP_PASS: ${{ secrets.MC_SFTP_PASS }}
+        run: |
+          set -o pipefail
+          python3 tools/sync_tienda.py | tee salida.txt
+          if grep -q '^CAMBIOS::' salida.txt; then
+            echo "hubo_cambios=si" >> "$GITHUB_OUTPUT"
+            echo "detalle=$(grep '^CAMBIOS::' salida.txt | sed 's/^CAMBIOS:://')" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publicar el cambio en el sitio
+        if: steps.sync.outputs.hubo_cambios == 'si'
+        run: |
+          rm -f salida.txt
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "El servidor se actualizo pero el sitio ya estaba al dia."
+            exit 0
+          fi
+          git config user.name "argentinacs-bot"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "Tienda actualizada automaticamente
+
+          - Se detectaron cambios en la planilla y se actualizo: ${{ steps.sync.outputs.detalle }}"
+          git push origin main

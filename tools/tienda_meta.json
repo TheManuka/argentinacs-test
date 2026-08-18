@@ -1,0 +1,36 @@
+{
+  "_comentario": "Metadatos de presentacion de la tienda. La planilla manda el titulo y el precio; esto define como se agrupa y que detalle extra se muestra. Si aparece un producto nuevo en la planilla que no este aca, el robot lo publica igual (en 'Otros') y avisa para completarlo.",
+  "secciones": [
+    { "id": "vip",      "web": "\u2b50 VIP",                          "juego": "VIP" },
+    { "id": "piedras",  "web": "\ud83d\udee1\ufe0f Piedras de Protecci\u00f3n", "juego": "Piedras de Proteccion" },
+    { "id": "spawners", "web": "\ud83e\udd5a Spawners",                "juego": "Spawners" },
+    { "id": "packs",    "web": "\ud83d\udce6 Packs (combos con descuento)", "juego": "Packs <gray>(todos con 2 Meses VIP)" },
+    { "id": "otros",    "web": "\ud83c\udd95 Otros",                   "juego": "Otros" }
+  ],
+  "productos": {
+    "vip":            { "seccion": "vip",      "juego_nombre": "VIP 30 dias",     "web_nombre": "VIP 30 d\u00edas",     "web_detalle": "incluye Piedra de Protecci\u00f3n de regalo", "juego_lineas": ["/back, /nv, VeinMiner, Silk Spawner", "AuraSkills +5%, 7 zonas, Elytra Fusion", "+ Piedra de Proteccion 32 de regalo"] },
+    "vip60":          { "seccion": "vip",      "juego_nombre": "VIP 2 Meses",     "web_nombre": "VIP 2 meses",         "web_detalle": "incluye Piedra de Protecci\u00f3n de regalo", "juego_lineas": ["+ Piedra de Proteccion 64 de regalo"] },
+    "ps32":           { "seccion": "piedras",  "juego_nombre": "Hierro 32",       "juego_detalle": "32x32",  "web_nombre": "Piedra de Hierro 32",     "web_detalle": "protege 32\u00d732 bloques (16 a cada lado)" },
+    "ps64":           { "seccion": "piedras",  "juego_nombre": "Diamante 64",     "juego_detalle": "64x64",  "web_nombre": "Piedra de Diamante 64",   "web_detalle": "protege 64\u00d764 bloques (32 a cada lado)" },
+    "ps128":          { "seccion": "piedras",  "juego_nombre": "Esmeralda 128",   "juego_detalle": "128x128","web_nombre": "Piedra de Esmeralda 128", "web_detalle": "protege 128\u00d7128 bloques (64 a cada lado)" },
+    "ps256":          { "seccion": "piedras",  "juego_nombre": "Netherite 256",   "juego_detalle": "256x256","web_nombre": "Piedra de Netherite 256", "web_detalle": "protege 256\u00d7256 bloques (128 a cada lado)" },
+    "sp_zombie":      { "seccion": "spawners", "juego_nombre": "Zombie",          "web_nombre": "Spawner de Zombie" },
+    "sp_esqueleto":   { "seccion": "spawners", "juego_nombre": "Esqueleto",       "web_nombre": "Spawner de Esqueleto" },
+    "sp_arana":       { "seccion": "spawners", "juego_nombre": "Ara\u00f1a",      "web_nombre": "Spawner de Ara\u00f1a" },
+    "sp_creeper":     { "seccion": "spawners", "juego_nombre": "Creeper",         "web_nombre": "Spawner de Creeper" },
+    "sp_blaze":       { "seccion": "spawners", "juego_nombre": "Blaze",           "web_nombre": "Spawner de Blaze" },
+    "sp_enderman":    { "seccion": "spawners", "juego_nombre": "Enderman",        "web_nombre": "Spawner de Enderman" },
+    "sp_aldeano":     { "seccion": "spawners", "juego_nombre": "Aldeano",         "web_nombre": "Spawner de Aldeano" },
+    "sp_wither":      { "seccion": "spawners", "juego_nombre": "Wither Skeleton", "web_nombre": "Spawner de Wither Skeleton" },
+    "pack_hierro":    { "seccion": "packs", "juego_nombre": "Hierro",   "juego_detalle": "Spawner Zombie",    "web_nombre": "Pack Hierro",   "web_detalle": "2 meses VIP + Spawner de Zombie" },
+    "pack_oro":       { "seccion": "packs", "juego_nombre": "Oro",      "juego_detalle": "Spawner Esqueleto", "web_nombre": "Pack Oro",      "web_detalle": "2 meses VIP + Spawner de Esqueleto" },
+    "pack_redstone":  { "seccion": "packs", "juego_nombre": "Redstone", "juego_detalle": "Spawner Ara\u00f1a","web_nombre": "Pack Redstone", "web_detalle": "2 meses VIP + Spawner de Ara\u00f1a" },
+    "pack_creeper":   { "seccion": "packs", "juego_nombre": "Creeper",  "juego_detalle": "Spawner Creeper",   "web_nombre": "Pack Creeper",  "web_detalle": "2 meses VIP + Spawner de Creeper" },
+    "pack_blaze":     { "seccion": "packs", "juego_nombre": "Blaze",    "juego_detalle": "Sp. Blaze + Piedra 32",              "web_nombre": "Pack Blaze",   "web_detalle": "VIP + Spawner de Blaze + Piedra 32" },
+    "pack_end":       { "seccion": "packs", "juego_nombre": "End",      "juego_detalle": "Sp. Enderman + Piedra 64",           "web_nombre": "Pack End",     "web_detalle": "VIP + Spawner de Enderman + Piedra 64" },
+    "pack_aldeano":   { "seccion": "packs", "juego_nombre": "Aldeano",  "juego_detalle": "Sp. Aldeano + Piedra 128",           "web_nombre": "Pack Aldeano", "web_detalle": "VIP + Spawner de Aldeano + Piedra 128" },
+    "pack_wither":    { "seccion": "packs", "juego_nombre": "Wither",   "juego_detalle": "Sp. W.Skeleton + Piedra 256",        "web_nombre": "Pack Wither",  "web_detalle": "VIP + Spawner de Wither Skeleton + Piedra 256" },
+    "pack_supremo":   { "seccion": "packs", "juego_nombre": "Supremo",  "juego_detalle": "Aldeano + Blaze + Piedra 256",       "web_nombre": "Pack Supremo", "web_detalle": "VIP + Aldeano + Blaze + Piedra 256" },
+    "pack_leyenda":   { "seccion": "packs", "juego_nombre": "Leyenda",  "juego_detalle": "W.Skeleton + Aldeano + Piedra 256",  "web_nombre": "Pack Leyenda", "web_detalle": "VIP + Wither Skeleton + Aldeano + Piedra 256" }
+  }
+}
