@@ -104,6 +104,41 @@
     }
     .paso p { color: var(--muted); font-size: 0.9rem; }
 
+    /* Bloque destacado: como contratar */
+    .como-contratar {
+      background: linear-gradient(180deg, rgba(255,182,30,.10), rgba(255,182,30,.04));
+      border: 1px solid rgba(255,182,30,.45); border-radius: var(--radius);
+      padding: 24px; margin-top: 18px;
+    }
+    .como-contratar h3 {
+      text-align: center; font-weight: 900; font-style: italic; text-transform: uppercase;
+      font-size: 1.1rem; color: var(--gold); margin-bottom: 4px;
+    }
+    .como-contratar .bajada { text-align: center; color: var(--muted); font-size: .92rem; margin-bottom: 18px; }
+    .cc-pasos { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+    .cc-paso { background: rgba(0,0,0,.28); border: 1px solid var(--border); border-radius: 12px; padding: 16px 14px; text-align: center; }
+    .cc-paso .n {
+      width: 30px; height: 30px; line-height: 30px; margin: 0 auto 8px; border-radius: 50%;
+      background: var(--gold); color: #131313; font-weight: 900; font-size: .95rem;
+    }
+    .cc-paso p { color: var(--muted); font-size: .88rem; }
+    .cc-paso strong { color: #fff; }
+    .cc-nota { text-align: center; color: var(--muted); font-size: .88rem; margin-top: 16px; }
+    .cc-nota strong { color: var(--gold-soft); }
+
+    /* Catalogo de la tienda */
+    .catalogo { margin-top: 18px; }
+    .cat-grupo { margin-bottom: 16px; }
+    .cat-grupo h3 {
+      font-size: .78rem; text-transform: uppercase; letter-spacing: .08em;
+      color: var(--gold); margin-bottom: 8px; text-align: center;
+    }
+    .cat-lista { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 6px; }
+    .cat-lista li {
+      background: rgba(0,0,0,.25); border: 1px solid var(--border); border-radius: 10px;
+      padding: 9px 14px; color: var(--muted); font-size: .9rem;
+    }
+    .cat-lista li strong { color: #fff; font-weight: 700; }
     .mcx-cta { text-align: center; padding: 40px 0 20px; }
     .mcx-cta .mc-ip { max-width: 340px; margin: 12px auto; }
   </style>
@@ -289,7 +324,7 @@
       <p class="mcx-aviso" style="margin-top:0">🎁 Compartí tu código de <code>/referral</code>: cuando tu amigo cumple <strong>1 hora de juego</strong>, vos ganás <strong>5 días de VIP + una Piedra de Protección 16</strong>. Hasta 5 amigos.</p>
     </section>
 
-    <section class="mcx-section">
+    <section class="mcx-section" id="vip">
       <h2 class="dorado">6 · Cuando quieras más: VIP</h2>
       <p class="intro">Ya lo probaste gratis los primeros 3 días — esto es todo lo que incluye:</p>
       <div class="panelizado">
@@ -306,7 +341,29 @@
           <tr><td>Piedra de Protección 32 de regalo</td><td>✗</td><td>—</td><td>✔</td></tr>
         </table>
       </div>
-      <p class="mcx-aviso">⭐ Se contrata con <code>/vip</code> dentro del juego (pago con QR de MercadoPago, solo desde Argentina — desde el exterior hablá con un staff) y dura 30 días.</p>
+      <div class="como-contratar">
+        <h3>⭐ Cómo contratar tu VIP</h3>
+        <p class="bajada">Se hace entero desde adentro del juego y tarda menos de dos minutos.</p>
+        <div class="cc-pasos">
+          <div class="cc-paso">
+            <div class="n">1</div>
+            <p>Entrá al servidor y escribí <strong>/vip</strong> en el chat</p>
+          </div>
+          <div class="cc-paso">
+            <div class="n">2</div>
+            <p>Elegí el plan: <strong>30 días</strong> o <strong>2 meses</strong></p>
+          </div>
+          <div class="cc-paso">
+            <div class="n">3</div>
+            <p>Se abre un <strong>código QR</strong>: escanealo con MercadoPago, MODO o tu banco</p>
+          </div>
+          <div class="cc-paso">
+            <div class="n">4</div>
+            <p>Pagás y <strong>el VIP se activa solo</strong>, al instante, sin esperar a nadie</p>
+          </div>
+        </div>
+        <p class="cc-nota">🎁 Cada vez que contratás VIP te llevás una <strong>Piedra de Protección de regalo</strong>. · 🌍 El pago con QR funciona <strong>solo desde Argentina</strong>: si estás en otro país, hablá con un staff en el <a href="https://discord.gg/argentinacs" target="_blank" rel="noopener">Discord</a> y lo resolvemos.</p>
+      </div>
     </section>
 
     <section class="mcx-section">
@@ -328,6 +385,59 @@
           <p>Apenas se acredita el pago, recibís el producto dentro del juego al instante. Sin esperar al staff, a cualquier hora.</p>
         </div>
       </div>
+
+      <p class="intro" style="margin-top:22px">Esto es todo lo que podés comprar hoy:</p>
+      <div class="catalogo">
+        <div class="cat-grupo">
+          <h3>⭐ VIP</h3>
+          <ul class="cat-lista">
+            <li><strong>VIP 30 días</strong> + Piedra de Protección de regalo</li>
+            <li><strong>VIP 2 meses</strong> + Piedra de Protección de regalo</li>
+          </ul>
+        </div>
+
+        <div class="cat-grupo">
+          <h3>🛡️ Piedras de Protección</h3>
+          <ul class="cat-lista">
+            <li><strong>Piedra de Hierro 32</strong> — protege 16×16</li>
+            <li><strong>Piedra de Diamante 64</strong> — protege 32×32</li>
+            <li><strong>Piedra de Esmeralda 128</strong> — protege 64×64</li>
+            <li><strong>Piedra de Netherite 256</strong> — protege 128×128</li>
+          </ul>
+        </div>
+
+        <div class="cat-grupo">
+          <h3>🥚 Spawners</h3>
+          <ul class="cat-lista">
+            <li><strong>Spawner de Zombie</strong></li>
+            <li><strong>Spawner de Esqueleto</strong></li>
+            <li><strong>Spawner de Araña</strong></li>
+            <li><strong>Spawner de Creeper</strong></li>
+            <li><strong>Spawner de Blaze</strong></li>
+            <li><strong>Spawner de Enderman</strong></li>
+            <li><strong>Spawner de Aldeano</strong></li>
+            <li><strong>Spawner de Wither Skeleton</strong></li>
+          </ul>
+        </div>
+
+        <div class="cat-grupo">
+          <h3>📦 Packs (combos con descuento)</h3>
+          <ul class="cat-lista">
+            <li><strong>Pack Hierro</strong> — 2 meses VIP + Spawner de Zombie</li>
+            <li><strong>Pack Oro</strong> — 2 meses VIP + Spawner de Esqueleto</li>
+            <li><strong>Pack Redstone</strong> — 2 meses VIP + Spawner de Araña</li>
+            <li><strong>Pack Creeper</strong> — 2 meses VIP + Spawner de Creeper</li>
+            <li><strong>Pack Blaze</strong> — VIP + Spawner de Blaze + Piedra 32</li>
+            <li><strong>Pack End</strong> — VIP + Spawner de Enderman + Piedra 64</li>
+            <li><strong>Pack Aldeano</strong> — VIP + Spawner de Aldeano + Piedra 128</li>
+            <li><strong>Pack Wither</strong> — VIP + Spawner de Wither Skeleton + Piedra 256</li>
+            <li><strong>Pack Supremo</strong> — VIP + Aldeano + Blaze + Piedra 256</li>
+            <li><strong>Pack Leyenda</strong> — VIP + Wither Skeleton + Aldeano + Piedra 256</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="mcx-aviso">💰 Los <strong>precios actualizados</strong> están siempre dentro del juego, en <code>/compras</code>.</p>
       <p class="mcx-aviso">🌍 El pago con QR funciona <strong>solo desde Argentina</strong>. ¿Estás en otro país y querés contratar algo? Hablá con un staff en el <a href="https://discord.gg/argentinacs" target="_blank" rel="noopener">Discord</a> y lo resolvemos.</p>
     </section>
 
