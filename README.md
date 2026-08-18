@@ -51,7 +51,7 @@ Recomendado: usar HTTPS (el botón de copiar IP funciona mejor en sitios seguros
 ## Jugadores en vivo
 
 - **CS 1.6 (listado):** cada tarjeta muestra el banner dinámico de **GameTracker** (jugadores conectados + mapa). Se actualiza solo. Si algún servidor no aparece, hay que agregarlo (gratis) en gametracker.com → "Add server".
-- **CS 1.6 (detalle):** al tocar una tarjeta se abre `servidor.html`, que muestra con diseño propio: estado, jugadores/máx, promedio, ranking, mapa actual, lista de conectados con score y tiempo, top 10 e historial (gráficos). Los datos los genera un **robot de GitHub Actions** (`.github/workflows/datos.yml` + `tools/scrape_gt.py`) que baja las páginas de GameTracker cada 10 minutos y publica `todos.json` en la rama `datos`; los gráficos son imágenes directas de GameTracker (necesitan el GSID de cada servidor, ver abajo).
+- **CS 1.6 (detalle):** al tocar una tarjeta se abre `servidor.html`, que muestra con diseño propio: estado, jugadores/máx, promedio, ranking, mapa actual, lista de conectados con score y tiempo, top 10 e historial (gráficos). Los datos los genera un **robot de GitHub Actions** (robot que vive en su propio repositorio, [argentinacs-datos](https://github.com/TheManuka/argentinacs-datos)) que consulta GameTracker cada 10 minutos; los gráficos son imágenes directas de GameTracker (necesitan el GSID de cada servidor, ver abajo).
 - **Minecraft:** el contador 🟢 X/Y usa la API pública de mcsrvstat.us y se refresca cada 2 minutos.
 
 **Al agregar un servidor nuevo** además de `tools/update_servers.ps1` hay que correr `tools/get_gsids.ps1` (regenera `assets/gt_ids.js` con los IDs de GameTracker para los gráficos).
