@@ -18,6 +18,7 @@ from datetime import datetime, timezone
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PAGINA = os.path.join(RAIZ, "servidor-minecraft-survival.html")
+PAGINA_VIP = os.path.join(RAIZ, "vip.html")
 META = os.path.join(RAIZ, "tools", "tienda_meta.json")
 
 CSV_URL = os.environ.get("TIENDA_CSV_URL", "")
@@ -106,6 +107,26 @@ def actualizar_sitio(grupos, meta):
     with open(PAGINA, "w", encoding="utf-8", newline="") as f:
         f.write(salida)
     cambios.append("catalogo del sitio web")
+    return True
+
+
+def actualizar_vip(productos):
+    """Deja el precio del VIP de Minecraft de vip.html igual al de la planilla."""
+    precio = next((p for c, _t, p in productos if c == "vip"), None)
+    if precio is None:
+        avisos.append("No esta el producto 'vip' en la planilla: vip.html queda como estaba")
+        return False
+    with open(PAGINA_VIP, encoding="utf-8") as f:
+        html = f.read()
+    patron = re.compile(r'(<span data-precio="vip">)\$[\d.]*(</span>)')
+    if not patron.search(html):
+        raise RuntimeError("No se encontro el precio del VIP de Minecraft en vip.html")
+    salida = patron.sub(lambda m: "%s$%s%s" % (m.group(1), miles(precio), m.group(2)), html, count=1)
+    if salida == html:
+        return False
+    with open(PAGINA_VIP, "w", encoding="utf-8", newline="") as f:
+        f.write(salida)
+    cambios.append("precio del VIP de Minecraft en la pagina de contratar VIP")
     return True
 
 
@@ -240,6 +261,7 @@ def main():
 
     grupos = agrupar(productos, meta)
     actualizar_sitio(grupos, meta)
+    actualizar_vip(productos)
     if SFTP_USER and SFTP_PASS:
         actualizar_servidor(grupos, meta)
     else:

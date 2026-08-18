@@ -7,9 +7,10 @@ funciona con la computadora apagada.
 ## Qué hace, en orden
 
 1. Lee el catálogo de la planilla (código, título y precio de cada producto).
-2. Actualiza el **catálogo del sitio web** (la lista de la página de Minecraft).
-3. Actualiza el **menú `/compras` del servidor** por SFTP, con precios nuevos.
-4. Si cambió algo del sitio, hace **push a `main`**.
+2. Actualiza el **catálogo del sitio web** (la lista de la página de Minecraft), con el precio de cada producto.
+3. Actualiza el **precio del VIP de Minecraft** en `vip.html` (la página de contratar VIP).
+4. Actualiza el **menú `/compras` del servidor** por SFTP, con precios nuevos.
+5. Si cambió algo del sitio, hace **push a `main`**.
 
 Si no cambió nada, no toca absolutamente nada y termina sin hacer ruido.
 
@@ -24,6 +25,9 @@ falta que nadie ejecute `/ce reload`.
 | `.github/workflows/tienda.yml` | El horario y los permisos |
 | `tools/sync_tienda.py` | Toda la lógica |
 | `tools/tienda_meta.json` | Cómo se presenta cada producto (grupo, nombre y descripción) |
+
+> ⚠️ **No editar a mano** el bloque `<div class="catalogo">` de `servidor-minecraft-survival.html`
+> ni el precio marcado con `data-precio="vip"` en `vip.html`: los reescribe el robot en cada corrida.
 
 ## Qué hay que configurar (una sola vez)
 
