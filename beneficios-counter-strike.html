@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Miembro, VIP y Admin en Counter-Strike 1.6 — ArgentinaCS</title>
+  <meta name="description" content="Qué incluye cada rango en los servidores de Counter-Strike 1.6 de ArgentinaCS: miembro gratis, VIP y Admin. Y cómo se compara nuestro VIP con el de otras comunidades.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#06070b">
+  <link rel="canonical" href="https://argentinacs.com.ar/beneficios-counter-strike.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ArgentinaCS">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:title" content="Miembro, VIP y Admin en Counter-Strike 1.6 — ArgentinaCS">
+  <meta property="og:description" content="Qué incluye cada rango en nuestros servidores de CS 1.6, y cómo se compara nuestro VIP con el de otras comunidades.">
+  <meta property="og:url" content="https://argentinacs.com.ar/beneficios-counter-strike.html">
+  <meta property="og:image" content="https://argentinacs.com.ar/assets/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Miembro, VIP y Admin en Counter-Strike 1.6 — ArgentinaCS">
+  <meta name="twitter:description" content="Qué incluye cada rango en nuestros servidores de CS 1.6, y cómo se compara nuestro VIP con el de otras comunidades.">
+  <meta name="twitter:image" content="https://argentinacs.com.ar/assets/og.jpg">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+  <style>
+    .ben-hero { text-align: center; padding: 46px 0 6px; }
+    .ben-hero h1 { font-size: clamp(1.8rem, 5vw, 2.9rem); margin-bottom: 12px; }
+    .ben-hero .sub { color: var(--muted); max-width: 660px; margin: 0 auto; }
+
+    /* ---- Los tres rangos ---- */
+    .rangos {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px; max-width: 1020px; margin: 34px auto 0; align-items: stretch;
+    }
+    .rango {
+      position: relative; display: flex; flex-direction: column;
+      background: linear-gradient(180deg, var(--panel-2), var(--panel));
+      border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 26px 22px 24px;
+    }
+    .rango.vip { border-color: rgba(255, 182, 30, .5); box-shadow: 0 10px 40px rgba(255, 182, 30, .08); }
+    .rango.admin { border-color: rgba(47, 155, 255, .38); }
+    .rango-badge {
+      position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+      color: #1a1300; font-size: .68rem; font-weight: 900; letter-spacing: .1em;
+      text-transform: uppercase; padding: 4px 12px; border-radius: 999px; white-space: nowrap;
+    }
+    .rango h2 {
+      font-weight: 900; font-style: italic; text-transform: uppercase;
+      font-size: 1.3rem; text-align: center; margin: 0;
+    }
+    .rango.gratis h2 { color: var(--blue-soft); }
+    .rango.vip h2 { color: var(--gold); }
+    .rango.admin h2 { color: var(--blue); }
+    .rango-sub { color: var(--muted); font-size: .82rem; text-align: center; margin: 6px 0 0; }
+    .rango-precio {
+      text-align: center; font-weight: 900; font-style: italic;
+      font-size: 2rem; margin: 14px 0 2px; line-height: 1;
+    }
+    .rango.gratis .rango-precio { color: var(--blue-soft); }
+    .rango.vip .rango-precio { color: var(--gold); }
+    .rango.admin .rango-precio { color: var(--blue); }
+    .rango-precio small { font-size: .78rem; font-weight: 700; font-style: normal; color: var(--muted); }
+    .rango ul {
+      list-style: none; padding: 0; margin: 18px 0 0;
+      border-top: 1px solid rgba(255, 255, 255, .07); padding-top: 16px;
+    }
+    .rango li {
+      color: var(--muted); font-size: .88rem; line-height: 1.45;
+      padding: 6px 0 6px 24px; position: relative;
+    }
+    .rango li::before { content: "✔"; position: absolute; left: 2px; top: 6px; font-size: .82rem; color: #6ee7a0; }
+    .rango li em { font-style: normal; color: var(--text); }
+
+    /* ---- Comparativa contra otras comunidades ---- */
+    .vs { max-width: 1020px; margin: 56px auto 0; }
+    .vs-encabezado {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 12px;
+    }
+    .vs-encabezado div {
+      text-align: center; font-weight: 900; font-style: italic; text-transform: uppercase;
+      font-size: .95rem; letter-spacing: .03em; padding: 10px 8px; border-radius: 10px;
+    }
+    .vs-encabezado .lado-bien { color: var(--blue); background: rgba(47, 155, 255, .1); border: 1px solid rgba(47, 155, 255, .3); }
+    .vs-encabezado .lado-mal { color: var(--red); background: rgba(230, 57, 70, .08); border: 1px solid rgba(230, 57, 70, .26); }
+    .vs-fila { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 10px; }
+    .vs-lado {
+      background: var(--panel); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px 16px 14px 42px; position: relative;
+    }
+    .vs-lado::before {
+      position: absolute; left: 15px; top: 14px; font-size: 1rem; font-weight: 900;
+    }
+    .vs-lado.bien { border-left: 3px solid rgba(47, 155, 255, .6); }
+    .vs-lado.bien::before { content: "✔"; color: #6ee7a0; }
+    .vs-lado.mal { border-left: 3px solid rgba(230, 57, 70, .5); opacity: .82; }
+    .vs-lado.mal::before { content: "✕"; color: var(--red); }
+    .vs-lado h3 { font-size: .95rem; margin: 0 0 4px; font-weight: 800; }
+    .vs-lado.bien h3 { color: var(--text); }
+    .vs-lado.mal h3 { color: #c9ced9; }
+    .vs-lado p { color: var(--muted); font-size: .85rem; margin: 0; line-height: 1.45; }
+
+    .vs-cierre {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px;
+    }
+    .vs-cierre div {
+      text-align: center; padding: 14px 16px; border-radius: 10px;
+      font-weight: 800; font-size: .92rem; line-height: 1.4;
+    }
+    .vs-cierre .lado-bien { color: var(--blue-soft); background: rgba(47, 155, 255, .1); border: 1px solid rgba(47, 155, 255, .28); }
+    .vs-cierre .lado-mal { color: #e8828b; background: rgba(230, 57, 70, .07); border: 1px solid rgba(230, 57, 70, .22); }
+
+    @media (max-width: 720px) {
+      .vs-encabezado, .vs-cierre { grid-template-columns: 1fr; }
+      .vs-fila { grid-template-columns: 1fr; gap: 8px; margin-bottom: 18px; }
+      .vs-encabezado { display: none; }
+      .vs-lado.bien::after, .vs-lado.mal::after {
+        position: absolute; right: 14px; top: 14px; font-size: .62rem;
+        text-transform: uppercase; letter-spacing: .08em; font-weight: 900;
+      }
+      .vs-lado.bien::after { content: "ArgentinaCS"; color: var(--blue); }
+      .vs-lado.mal::after { content: "Otras"; color: var(--red); }
+      .vs-lado { padding-right: 96px; }
+    }
+
+    .ben-cta { text-align: center; margin: 48px auto 10px; }
+    .ben-cta p { color: var(--muted); margin-bottom: 16px; }
+    .ben-nota {
+      max-width: 760px; margin: 30px auto 44px; padding: 14px 20px; text-align: center;
+      background: rgba(255, 182, 30, .07); border: 1px dashed rgba(255, 182, 30, .4);
+      border-radius: var(--radius); color: var(--muted); font-size: .9rem;
+    }
+  </style>
+  <script src="assets/analytics.js" defer></script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">
+        <svg class="brand-logo" viewBox="0 0 100 100" aria-hidden="true">
+          <g transform="rotate(45 50 50)" fill="#ffffff">
+            <path fill-rule="evenodd" d="M18 18h64v64H18ZM26 26v48h48V26Z"/>
+            <rect x="29" y="29" width="31" height="8"/>
+            <rect x="63" y="29" width="8" height="31"/>
+            <rect x="40" y="63" width="31" height="8"/>
+            <rect x="29" y="40" width="8" height="31"/>
+          </g>
+        </svg>
+        <span class="brand-text">
+          <span class="brand-name">ArgentinaCS</span>
+          <span class="brand-tagline">Llevando juego a la vida de todos</span>
+        </span>
+      </a>
+      <nav class="main-nav">
+        <div class="nav-sub">
+          <a href="index.html#cs">Counter-Strike <span class="caret">&#9662;</span></a>
+          <div class="sub-menu">
+            <a href="novedades-counter-strike.html">&#128478;&#65039; Novedades</a>
+            <a href="index.html#cs">&#127919; Servidores CS 1.6</a>
+            <a href="beneficios-counter-strike.html">&#11088; Miembro, VIP y Admin</a>
+            <hr>
+            <a href="reglas-counter-strike.html">&#128220; Reglas de CS 1.6</a>
+            <a href="reglamento-general.html">&#128203; Reglamento general</a>
+          </div>
+        </div>
+        <div class="nav-sub">
+          <a href="servidor-minecraft-survival.html">Minecraft <span class="caret">&#9662;</span></a>
+          <div class="sub-menu">
+            <a href="novedades-minecraft.html">&#128478;&#65039; Novedades</a>
+            <a href="servidor-minecraft-survival.html">&#8505;&#65039; Conoce el servidor</a>
+            <a href="como-instalar-chat-de-voz.html">&#127897;&#65039; Instalar chat de voz</a>
+            <hr>
+            <a href="reglas-servidor-minecraft.html">&#128220; Reglas de Minecraft</a>
+            <a href="reglamento-general.html">&#128203; Reglamento general</a>
+          </div>
+        </div>
+        <div class="nav-sub">
+          <a href="reglamento-general.html">Reglamento <span class="caret">&#9662;</span></a>
+          <div class="sub-menu">
+            <a href="reglamento-general.html">&#128203; General de la comunidad</a>
+            <a href="reglas-counter-strike.html">&#127919; Counter-Strike 1.6</a>
+            <a href="reglas-servidor-minecraft.html">&#9935;&#65039; Minecraft</a>
+          </div>
+        </div>
+        <a href="tienda.html">Tienda</a>
+        <a href="index.html#redes">Redes</a>
+        <a class="nav-cta" href="vip.html">&#11088; Contrata VIP</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <div class="ben-hero">
+      <a class="btn btn-ghost" href="index.html#cs">&#8592; Volver a los servidores</a>
+      <h1 class="display">Miembro, <span class="text-gold">VIP</span> y <span class="text-blue">Admin</span></h1>
+      <p class="sub">Todo lo que incluye cada rango en nuestros servidores de Counter-Strike 1.6. Entrar y jugar siempre fue gratis; los otros dos suman comodidades arriba de eso.</p>
+    </div>
+
+    <section class="rangos" aria-label="Rangos de Counter-Strike 1.6">
+
+      <article class="rango gratis">
+        <h2>Miembro</h2>
+        <p class="rango-sub">Acceso estándar a la comunidad</p>
+        <p class="rango-precio">Gratis</p>
+        <ul>
+          <li>Acceso a <em>todos</em> los servidores</li>
+          <li>Acceso a los canales de Discord, y podés crear el tuyo</li>
+          <li><em>RS ilimitados</em></li>
+          <li><em>Retry</em> gratis</li>
+          <li>Skins de armas gratis</li>
+          <li>Skins de personajes</li>
+          <li>Ping alto permitido</li>
+          <li>Participás gratis en todos los eventos de la comunidad</li>
+        </ul>
+      </article>
+
+      <article class="rango vip">
+        <span class="rango-badge">Más elegido</span>
+        <h2>VIP</h2>
+        <p class="rango-sub">Beneficios exclusivos para miembros VIP</p>
+        <p class="rango-precio">$2.000 <small>/ mes</small></p>
+        <ul>
+          <li>Acceso a <em>todos</em> los servidores</li>
+          <li>Acceso a los canales de Discord, y podés crear el tuyo</li>
+          <li><em>Rol VIP</em> destacado dentro de la comunidad</li>
+          <li><em>Slot reservado</em> en los servidores</li>
+          <li><em>Nombre reservado</em>: nadie más puede usarlo</li>
+          <li>Skin de personaje exclusiva de VIP</li>
+          <li>Si estás en el exterior, <em>2 meses gratis</em> con opción a renovar</li>
+        </ul>
+      </article>
+
+      <article class="rango admin">
+        <h2>Admin</h2>
+        <p class="rango-sub">Privilegios avanzados dentro de la comunidad</p>
+        <p class="rango-precio">$2.500 <small>/ mes</small></p>
+        <ul>
+          <li>Acceso a <em>todos</em> los servidores</li>
+          <li>Acceso completo a los canales de Discord, y podés crear el tuyo</li>
+          <li><em>Rol Admin</em> destacado dentro de la comunidad</li>
+          <li><em>Comandos exclusivos</em> de administración</li>
+          <li><em>Slot reservado</em> en los servidores</li>
+          <li><em>Nombre reservado</em>: nadie más puede usarlo</li>
+          <li>Skin de personaje exclusiva de Admin</li>
+        </ul>
+      </article>
+
+    </section>
+
+    <section class="vs" aria-label="Nuestro VIP comparado con el de otras comunidades">
+      <div class="section-head" style="margin-bottom:26px">
+        <h2 class="display">Nuestro VIP contra <span class="text-gold">el de al lado</span></h2>
+        <p class="sub">Mismo precio, distinta lista. Esto es lo que solés encontrar en otras comunidades y lo que vas a encontrar acá.</p>
+      </div>
+
+      <div class="vs-encabezado">
+        <div class="lado-bien">VIP ArgentinaCS</div>
+        <div class="lado-mal">Otras comunidades</div>
+      </div>
+
+      <div class="vs-fila">
+        <div class="vs-lado bien">
+          <h3>Slot reservado en cualquier servidor</h3>
+          <p>Entrás siempre, aunque esté lleno. Sin hacer cola.</p>
+        </div>
+        <div class="vs-lado mal">
+          <h3>A lo sumo, slot reservado</h3>
+          <p>Y en muchos casos, ni siquiera eso.</p>
+        </div>
+      </div>
+
+      <div class="vs-fila">
+        <div class="vs-lado bien">
+          <h3>Tu tag queda protegido</h3>
+          <p>Tu nombre es tuyo: nadie más lo puede usar.</p>
+        </div>
+        <div class="vs-lado mal">
+          <h3>El tag no está protegido</h3>
+          <p>Cualquiera puede entrar con tu nombre.</p>
+        </div>
+      </div>
+
+      <div class="vs-fila">
+        <div class="vs-lado bien">
+          <h3>Ves el daño hecho, en tiempo real</h3>
+          <p>Más información en la ronda, mejores decisiones.</p>
+        </div>
+        <div class="vs-lado mal">
+          <h3>Sin daño hecho</h3>
+          <p>Jugás a ciegas y adivinás cuánto pegaste.</p>
+        </div>
+      </div>
+
+      <div class="vs-fila">
+        <div class="vs-lado bien">
+          <h3>Models y skins, gratis</h3>
+          <p>Todas las skins y todos los modelos habilitados.</p>
+        </div>
+        <div class="vs-lado mal">
+          <h3>Models y skins para unos pocos</h3>
+          <p>O directamente no los tienen.</p>
+        </div>
+      </div>
+
+      <div class="vs-fila">
+        <div class="vs-lado bien">
+          <h3>Funciones exclusivas</h3>
+          <p>Comandos propios del rango, y algunas cosas más.</p>
+        </div>
+        <div class="vs-lado mal">
+          <h3>Sin funciones exclusivas</h3>
+          <p>Lo mismo que ya tenías antes de pagar.</p>
+        </div>
+      </div>
+
+      <div class="vs-fila">
+        <div class="vs-lado bien">
+          <h3>Nada de ventajas injustas</h3>
+          <p>El VIP suma comodidad, no puntería. Jugamos todos en igualdad.</p>
+        </div>
+        <div class="vs-lado mal">
+          <h3>Experiencia poco seria</h3>
+          <p>Servidores vacíos, reglas confusas y administración ausente.</p>
+        </div>
+      </div>
+
+      <div class="vs-cierre">
+        <div class="lado-bien">Más beneficios, menos humo.</div>
+        <div class="lado-mal">Pagás lo mismo y recibís mucho menos.</div>
+      </div>
+    </section>
+
+    <div class="ben-cta">
+      <p>¿Te cerró? El VIP y el Admin te los activa el staff, hablando por WhatsApp.</p>
+      <a class="btn btn-gold" href="vip.html#cs">Contratá tu VIP o Admin</a>
+    </div>
+
+    <p class="ben-nota">🌍 Los pagos con QR de MercadoPago funcionan <strong>solo desde Argentina</strong>. Si estás en otro país, escribinos igual: el VIP tiene <strong>2 meses gratis</strong> para jugadores del exterior.</p>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Comunidad ArgentinaCS &mdash; Llevando juego a la vida de todos.</p>
+      <p class="footer-credit">Sitio creado por Manuka</p>
+    </div>
+  </footer>
+
+  <script src="assets/main.js"></script>
+</body>
+</html>

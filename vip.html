@@ -63,6 +63,54 @@
     }
     .wa-ico { display: inline-flex; width: 18px; height: 18px; }
     .wa-ico svg { width: 100%; height: 100%; fill: currentColor; }
+    /* ---- Planes de Counter-Strike ---- */
+    .cs-planes { max-width: 900px; margin: 58px auto 0; scroll-margin-top: 90px; }
+    .planes-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 18px; align-items: stretch; margin-top: 8px;
+    }
+    .plan {
+      position: relative; display: flex; flex-direction: column;
+      background: linear-gradient(180deg, var(--panel-2), var(--panel));
+      border: 1px solid var(--border); border-radius: var(--radius); padding: 26px 22px 24px;
+    }
+    .plan.vip { border-color: rgba(255,182,30,.5); box-shadow: 0 10px 40px rgba(255,182,30,.08); }
+    .plan.admin { border-color: rgba(47,155,255,.38); }
+    .plan-badge {
+      position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+      color: #1a1300; font-size: .68rem; font-weight: 900; letter-spacing: .1em;
+      text-transform: uppercase; padding: 4px 12px; border-radius: 999px; white-space: nowrap;
+    }
+    .plan h3 {
+      font-weight: 900; font-style: italic; text-transform: uppercase;
+      font-size: 1.3rem; text-align: center; margin: 0;
+    }
+    .plan.vip h3 { color: var(--gold); }
+    .plan.admin h3 { color: var(--blue); }
+    .plan-sub { color: var(--muted); font-size: .82rem; text-align: center; margin: 6px 0 0; }
+    .plan-precio {
+      text-align: center; font-weight: 900; font-style: italic;
+      font-size: 2rem; margin: 14px 0 2px; line-height: 1;
+    }
+    .plan.vip .plan-precio { color: var(--gold); }
+    .plan.admin .plan-precio { color: var(--blue); }
+    .plan-precio small { font-size: .78rem; font-weight: 700; font-style: normal; color: var(--muted); }
+    .plan ul {
+      list-style: none; padding: 0; margin: 18px 0 0;
+      border-top: 1px solid rgba(255,255,255,.07); padding-top: 16px;
+    }
+    .plan li {
+      color: var(--muted); font-size: .88rem; line-height: 1.45;
+      padding: 6px 0 6px 24px; position: relative;
+    }
+    .plan li::before { content: "✔"; position: absolute; left: 2px; top: 6px; font-size: .82rem; color: #6ee7a0; }
+    .plan li em { font-style: normal; color: var(--text); }
+
+    .wa-bloque { max-width: 460px; margin: 28px auto 0; text-align: center; }
+    .wa-bloque > p { color: var(--muted); font-size: .9rem; margin-bottom: 12px; }
+    .ver-mas { text-align: center; margin-top: 22px; font-size: .92rem; color: var(--muted); }
+
     .vip-nota {
       max-width: 760px; margin: 26px auto 40px; padding: 14px 20px; text-align: center;
       background: rgba(255,182,30,.07); border: 1px dashed rgba(255,182,30,.4);
@@ -97,6 +145,7 @@
           <div class="sub-menu">
             <a href="novedades-counter-strike.html">&#128478;&#65039; Novedades</a>
             <a href="index.html#cs">&#127919; Servidores CS 1.6</a>
+            <a href="beneficios-counter-strike.html">&#11088; Miembro, VIP y Admin</a>
             <hr>
             <a href="reglas-counter-strike.html">&#128220; Reglas de CS 1.6</a>
             <a href="reglamento-general.html">&#128203; Reglamento general</a>
@@ -155,13 +204,62 @@
       <div class="vip-op cs">
         <div class="ico">🎯</div>
         <h2>Counter-Strike 1.6</h2>
-        <p class="desc">Contratá tu <strong>VIP</strong> o tu cuenta <strong>ADMIN</strong> hablando directo con el staff.</p>
+        <p class="desc">Elegí <strong>VIP</strong> o <strong>ADMIN</strong>. Te lo activa el staff, hablando por WhatsApp.</p>
         <ul class="vip-lista">
-          <li>Beneficios exclusivos en nuestros servidores</li>
-          <li>Te lo activa el staff de la comunidad</li>
-          <li>Te respondemos por WhatsApp</li>
+          <li>Slot reservado: entrás siempre, aunque esté lleno</li>
+          <li>Tu nombre queda protegido, nadie más lo usa</li>
+          <li>Rol destacado dentro de la comunidad</li>
+          <li>Skin de personaje exclusiva del rango</li>
         </ul>
-        <p class="desc" style="margin-bottom:14px">Tocá el botón y se abre WhatsApp con el mensaje listo para enviar:</p>
+        <a class="btn btn-gold" href="#cs">Ver los dos planes</a>
+      </div>
+
+    </div>
+
+    <section class="cs-planes" id="cs">
+
+      <div class="section-head" style="margin-bottom:0">
+        <h2 class="display"><span class="text-gold">VIP</span> y <span class="text-blue">Admin</span> en Counter-Strike 1.6</h2>
+        <p class="sub">Los dos se pagan por mes y los activa el staff. Todo lo que suman es comodidad: ninguno te da ventaja adentro de la ronda.</p>
+      </div>
+
+      <div class="planes-grid">
+
+        <article class="plan vip">
+          <span class="plan-badge">Más elegido</span>
+          <h3>VIP</h3>
+          <p class="plan-sub">Beneficios exclusivos para miembros VIP</p>
+          <p class="plan-precio">$2.000 <small>/ mes</small></p>
+          <ul>
+            <li>Acceso a <em>todos</em> los servidores</li>
+            <li>Acceso a los canales de Discord, y podés crear el tuyo</li>
+            <li><em>Rol VIP</em> destacado dentro de la comunidad</li>
+            <li><em>Slot reservado</em>: entrás siempre, aunque esté lleno</li>
+            <li><em>Nombre reservado</em>: nadie más puede usarlo</li>
+            <li>Skin de personaje exclusiva de VIP</li>
+            <li>Si estás en el exterior, <em>2 meses gratis</em> con opción a renovar</li>
+          </ul>
+        </article>
+
+        <article class="plan admin">
+          <h3>Admin</h3>
+          <p class="plan-sub">Privilegios avanzados dentro de la comunidad</p>
+          <p class="plan-precio">$2.500 <small>/ mes</small></p>
+          <ul>
+            <li>Acceso a <em>todos</em> los servidores</li>
+            <li>Acceso completo a los canales de Discord, y podés crear el tuyo</li>
+            <li><em>Rol Admin</em> destacado dentro de la comunidad</li>
+            <li><em>Comandos exclusivos</em> de administración</li>
+            <li><em>Slot reservado</em>: entrás siempre, aunque esté lleno</li>
+            <li><em>Nombre reservado</em>: nadie más puede usarlo</li>
+            <li>Skin de personaje exclusiva de Admin</li>
+          </ul>
+        </article>
+
+      </div>
+
+      <div class="wa-bloque">
+        <p>Tocá el botón y se abre WhatsApp con el mensaje listo para enviar:</p>
         <div class="wa-botones">
           <a class="btn btn-wa" href="https://wa.me/5493834917268?text=Hola!%20%F0%9F%91%8B%F0%9F%8F%BB%0ABusco%20contratar%20VIP" target="_blank" rel="noopener">
             <span class="wa-ico" aria-hidden="true">
@@ -178,7 +276,9 @@
         </div>
       </div>
 
-    </div>
+      <p class="ver-mas">¿Querés ver también qué incluye el rango gratis y cómo se compara con el de otras comunidades? <a href="beneficios-counter-strike.html">Mirá la comparativa completa</a>.</p>
+
+    </section>
 
     <p class="vip-nota">🌍 Los pagos con QR de MercadoPago funcionan <strong>solo desde Argentina</strong>. Si estás en otro país y querés contratar, hablá con un staff en el <a href="https://discord.gg/argentinacs" target="_blank" rel="noopener">Discord</a> y lo resolvemos.</p>
 
