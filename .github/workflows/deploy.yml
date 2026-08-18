@@ -1,0 +1,52 @@
+name: Publicar entorno de prueba
+
+# Publica el espejo de pruebas https://themanuka.github.io/argentinacs-test/
+#
+# El sitio EN VIVO no se publica desde aca: lo despliega Joty a mano en su
+# propio servidor, asi que en acesino25/argentinacs-landing este trabajo
+# siempre se saltea (aparece como "skipped" y no consume nada).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  publicar:
+    if: github.repository == 'TheManuka/argentinacs-test'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Bajar el contenido
+        uses: actions/checkout@v4
+
+      - name: Preparar el sitio (sin archivos internos)
+        run: |
+          mkdir salida
+          rsync -a --exclude '.git' --exclude '.github' --exclude 'salida' \
+            --exclude 'tools' --exclude 'README.md' \
+            --exclude '.gitattributes' --exclude '.gitignore' \
+            ./ salida/
+          # El espejo no usa el dominio real y no debe aparecer en buscadores.
+          rm -f salida/CNAME
+          printf 'User-agent: *\nDisallow: /\n' > salida/robots.txt
+
+      - name: Subir artefacto
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: salida
+
+      - name: Publicar en GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
