@@ -209,6 +209,12 @@ a:hover { text-decoration: none; }
 
 .sub-menu a:hover { background: rgba(255, 255, 255, 0.08); }
 
+.sub-menu hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 6px 10px;
+}
+
 /* ---------- Cinta "en construcción" ---------- */
 .construction-ribbon {
   background: repeating-linear-gradient(
